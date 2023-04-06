@@ -113,6 +113,37 @@ describe('@/modules/Calculator', () => {
 
       expect(calculator.print()).toBe(expected)
     })
+
+    it('should write the number again if you backspace after the operator', () => {
+      calculator.setOperation(Operation.multiplication)
+        .doBackspace()
+        .addNumber(2)
+
+      expect(calculator.print()).toBe('2')
+    })
+
+    it('should write on first number if you backspace enough to remove the second number and the operator', () => {
+      calculator.addNumber(9)
+        .setOperation(Operation.addition)
+        .addNumber(2)
+        .doBackspace()
+        .doBackspace()
+        .addNumber(3)
+
+      expect(calculator.print()).toBe('93')
+    })
+
+    it('should rewrite the operator if you backspace enough to remove the second number', () => {
+      calculator.addNumber(3)
+        .setOperation(Operation.multiplication)
+        .addNumber(9)
+        .addNumber(9)
+        .doBackspace()
+        .doBackspace()
+        .setOperation(Operation.division)
+
+      expect(calculator.print()).toBe('3 ÷')
+    })
   })
 
   describe('Clearing', () => {

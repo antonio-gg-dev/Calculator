@@ -1,15 +1,12 @@
 export class Calculator {
-  private firstNumber = false
-  public print (): string {
-    if (this.firstNumber) {
-      return '1'
-    }
+  private firstNumber = 0
 
-    return '0'
+  public print (): string {
+    return this.firstNumber.toString()
   }
 
   public addNumber (number: number): Calculator {
-    this.firstNumber = true
+    this.firstNumber = number
 
     return this
   }

@@ -16,4 +16,10 @@ describe('', () => {
 
     expect(calculator.print()).toBe('1')
   })
+
+  it('should print 2 when number 2 added', () => {
+    calculator.addNumber(2)
+
+    expect(calculator.print()).toBe('2')
+  })
 })

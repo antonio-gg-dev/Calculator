@@ -7,15 +7,20 @@ export enum Operation {
 export class Calculator {
   private firstNumber = 0
   private operation: Operation | undefined
+  private secondNumber = 0
 
   public print (): string {
-    return [this.firstNumber, this.operation]
+    return [this.firstNumber, this.operation, this.secondNumber || undefined]
       .filter(v => v !== undefined)
       .join(' ')
   }
 
   public addNumber (number: 0|1|2|3|4|5|6|7|8|9): Calculator {
-    this.firstNumber = Number(`${this.firstNumber}${number}`)
+    if (this.operation) {
+      this.secondNumber = Number(`${this.secondNumber}${number}`)
+    } else {
+      this.firstNumber = Number(`${this.firstNumber}${number}`)
+    }
 
     return this
   }

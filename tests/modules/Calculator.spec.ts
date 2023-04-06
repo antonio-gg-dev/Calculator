@@ -11,7 +11,7 @@ describe('@/modules/Calculator', () => {
     expect(calculator.print()).toBe('0')
   })
 
-  describe('Adding numbers', () => {
+  describe('Adding Numbers', () => {
     it.each`
       given | expected
       ${0}  | ${'0'}
@@ -153,6 +153,22 @@ describe('@/modules/Calculator', () => {
     `('should print only the last operator "$expected" when "$givenFirst" operation given then "$givenSecond"', ({ givenFirst, givenSecond, expected }) => {
       calculator.setOperation(givenFirst)
         .setOperation(givenSecond)
+
+      expect(calculator.print()).toBe(expected)
+    })
+  })
+
+  describe('Adding Numbers After Operator', () => {
+    it.each`
+      givenOperator               | givenNumber | expected
+      ${Operation.addition}       | ${1}        | ${'0 + 1'}
+      ${Operation.addition}       | ${4}        | ${'0 + 4'}
+      ${Operation.subtraction}    | ${5}        | ${'0 − 5'}
+      ${Operation.division}       | ${6}        | ${'0 ÷ 6'}
+      ${Operation.multiplication} | ${7}        | ${'0 × 7'}
+    `('should print "$expected" when add number $givenNumber after set "$givenOperator" operation', ({ givenOperator, givenNumber, expected }) => {
+      calculator.setOperation(givenOperator)
+        .addNumber(givenNumber)
 
       expect(calculator.print()).toBe(expected)
     })

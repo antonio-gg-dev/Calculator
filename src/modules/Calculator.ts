@@ -10,4 +10,10 @@ export class Calculator {
 
     return this
   }
+
+  public doBackspace (): Calculator {
+    this.firstNumber = 0
+
+    return this
+  }
 }

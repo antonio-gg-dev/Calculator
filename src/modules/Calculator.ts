@@ -28,6 +28,7 @@ export class Calculator {
 
   public doClear (): Calculator {
     this.firstNumber = 0
+    this.operation = undefined
 
     return this
   }

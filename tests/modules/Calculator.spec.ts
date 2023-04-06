@@ -102,6 +102,19 @@ describe('@/modules/Calculator', () => {
 
       expect(calculator.print()).toBe('0')
     })
+
+    it.each`
+      given
+      ${Operation.addition}
+      ${Operation.subtraction}
+      ${Operation.division}
+      ${Operation.multiplication}
+    `('should print "0" when operation "$givenFirst" then clear', ({ given }) => {
+      calculator.setOperation(given)
+        .doClear()
+
+      expect(calculator.print()).toBe('0')
+    })
   })
 
   describe('Operators', () => {

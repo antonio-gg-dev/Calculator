@@ -59,6 +59,6 @@ li {
   margin: 0 10px;
 }
 a {
-  color: #42b983;
+  @apply text-red-600;
 }
 </style>

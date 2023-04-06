@@ -1,6 +1,6 @@
 import { Calculator } from '@/modules/Calculator'
 
-describe('', () => {
+describe('@/modules/Calculator', () => {
   let calculator: Calculator
 
   beforeEach(() => {
@@ -21,5 +21,11 @@ describe('', () => {
     calculator.addNumber(2)
 
     expect(calculator.print()).toBe('2')
+  })
+
+  it('should print 10 when number 1 then 0 added', () => {
+    calculator.addNumber(1).addNumber(0)
+
+    expect(calculator.print()).toBe('10')
   })
 })

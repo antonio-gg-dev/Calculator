@@ -6,7 +6,7 @@ export class Calculator {
   }
 
   public addNumber (number: number): Calculator {
-    this.firstNumber = number
+    this.firstNumber = Number(`${this.firstNumber}${number}`)
 
     return this
   }

@@ -84,6 +84,20 @@ describe('@/modules/Calculator', () => {
 
       expect(calculator.print()).toBe(expected)
     })
+
+    it.each`
+      givenNumber | givenOperation              | expected
+      ${0}        | ${Operation.addition}       | ${'0'}
+      ${1}        | ${Operation.subtraction}    | ${'1'}
+      ${3}        | ${Operation.division}       | ${'3'}
+      ${8}        | ${Operation.multiplication} | ${'8'}
+    `('should print "$expected" only removing the operator "$givenOperation" when backspace after operator and number $givenNumber', ({ givenNumber, givenOperation, expected }) => {
+      calculator.addNumber(givenNumber)
+        .setOperation(givenOperation)
+        .doBackspace()
+
+      expect(calculator.print()).toBe(expected)
+    })
   })
 
   describe('Clearing', () => {
@@ -131,7 +145,7 @@ describe('@/modules/Calculator', () => {
     })
 
     it.each`
-      givenFirst                 | givenSecond                 | expected
+      givenFirst                  | givenSecond                 | expected
       ${Operation.subtraction}    | ${Operation.addition}       | ${'0 +'}
       ${Operation.division}       | ${Operation.subtraction}    | ${'0 −'}
       ${Operation.multiplication} | ${Operation.division}       | ${'0 ÷'}

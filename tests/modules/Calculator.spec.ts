@@ -1,4 +1,4 @@
-import { Calculator } from '@/modules/Calculator'
+import { Calculator, Operation } from '@/modules/Calculator'
 
 describe('@/modules/Calculator', () => {
   let calculator: Calculator
@@ -105,10 +105,16 @@ describe('@/modules/Calculator', () => {
   })
 
   describe('Operators', () => {
-    it('should print the operator "+" after the number when "addition" operation given', () => {
-      calculator.setOperation('addition')
+    it.each`
+      given               | expected
+      ${Operation.addition}       | ${'0 +'}
+      ${Operation.subtraction}    | ${'0 −'}
+      ${Operation.division}       | ${'0 ÷'}
+      ${Operation.multiplication} | ${'0 ×'}
+    `('should print the operator after the number ("$expected") when "$given" operation given', ({ given, expected }) => {
+      calculator.setOperation(given)
 
-      expect(calculator.print()).toBe('0 +')
+      expect(calculator.print()).toBe(expected)
     })
   })
 })

@@ -1,13 +1,17 @@
+export enum Operation {
+  addition = '+',
+  subtraction = '−',
+  division = '÷',
+  multiplication = '×',
+}
 export class Calculator {
   private firstNumber = 0
-  private operation = false
+  private operation: Operation | undefined
 
   public print (): string {
-    if (this.operation) {
-      return this.firstNumber + ' +'
-    }
-
-    return this.firstNumber.toString()
+    return [this.firstNumber, this.operation]
+      .filter(v => v !== undefined)
+      .join(' ')
   }
 
   public addNumber (number: number): Calculator {
@@ -28,8 +32,8 @@ export class Calculator {
     return this
   }
 
-  public setOperation (operation: string): Calculator {
-    this.operation = true
+  public setOperation (operation: Operation): Calculator {
+    this.operation = operation
 
     return this
   }

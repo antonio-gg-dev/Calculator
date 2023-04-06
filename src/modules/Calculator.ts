@@ -1,7 +1,12 @@
 export class Calculator {
   private firstNumber = 0
+  private operation = false
 
   public print (): string {
+    if (this.operation) {
+      return this.firstNumber + ' +'
+    }
+
     return this.firstNumber.toString()
   }
 
@@ -19,6 +24,12 @@ export class Calculator {
 
   public doClear (): Calculator {
     this.firstNumber = 0
+
+    return this
+  }
+
+  public setOperation (operation: string): Calculator {
+    this.operation = true
 
     return this
   }

@@ -77,7 +77,7 @@ describe('@/modules/Calculator', () => {
       ${4}       | ${4}        | ${'4'}
       ${6}       | ${3}        | ${'6'}
       ${8}       | ${0}        | ${'8'}
-    `('should print "$expected" when number $givenFirst$givenSecond added then backspace', ({ givenFirst, givenSecond, expected }) => {
+    `('should print "$expected" when numbers $givenFirst and $givenSecond added then backspace', ({ givenFirst, givenSecond, expected }) => {
       calculator.addNumber(givenFirst)
         .addNumber(givenSecond)
         .doBackspace()
@@ -94,13 +94,21 @@ describe('@/modules/Calculator', () => {
       ${0}       | ${7}        | ${4}
       ${4}       | ${1}        | ${2}
       ${2}       | ${9}        | ${8}
-    `('should print "0" when number $givenFirst$givenSecond$givenThird added then clear', ({ givenFirst, givenSecond, givenThird }) => {
+    `('should print "0" when numbers $givenFirst, $givenSecond and $givenThird added then clear', ({ givenFirst, givenSecond, givenThird }) => {
       calculator.addNumber(givenFirst)
         .addNumber(givenSecond)
         .addNumber(givenThird)
         .doClear()
 
       expect(calculator.print()).toBe('0')
+    })
+  })
+
+  describe('Operators', () => {
+    it('should print the operator "+" after the number when "addition" operation given', () => {
+      calculator.setOperation('addition')
+
+      expect(calculator.print()).toBe('0 +')
     })
   })
 })

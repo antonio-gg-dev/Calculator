@@ -123,8 +123,23 @@ describe('@/modules/Calculator', () => {
       ${Operation.subtraction}
       ${Operation.division}
       ${Operation.multiplication}
-    `('should print "0" when operation "$givenFirst" then clear', ({ given }) => {
+    `('should print "0" when operation "$given" then clear', ({ given }) => {
       calculator.setOperation(given)
+        .doClear()
+
+      expect(calculator.print()).toBe('0')
+    })
+
+    it.each`
+      givenOperator               | givenNumber
+      ${Operation.addition}       | ${1}
+      ${Operation.addition}       | ${4}
+      ${Operation.subtraction}    | ${5}
+      ${Operation.division}       | ${6}
+      ${Operation.multiplication} | ${7}
+    `('should print "0" when when operation "$givenOperator" and second number $givenNumber then clear', ({ givenOperator, givenNumber }) => {
+      calculator.setOperation(givenOperator)
+        .addNumber(givenNumber)
         .doClear()
 
       expect(calculator.print()).toBe('0')

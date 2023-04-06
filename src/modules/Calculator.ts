@@ -12,7 +12,7 @@ export class Calculator {
   }
 
   public doBackspace (): Calculator {
-    this.firstNumber = 0
+    this.firstNumber = Math.floor(this.firstNumber / 10)
 
     return this
   }

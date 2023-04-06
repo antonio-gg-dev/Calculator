@@ -30,10 +30,18 @@ describe('@/modules/Calculator', () => {
     expect(calculator.print()).toBe('10')
   })
 
-  it("should print 0 when any number added then backspace", () => {
+  it('should print 0 when number 1 added then backspace', () => {
     calculator.addNumber(1)
       .doBackspace()
 
     expect(calculator.print()).toBe('0')
-  });
+  })
+
+  it('should print 1 when number 10 added then backspace', () => {
+    calculator.addNumber(1)
+      .addNumber(0)
+      .doBackspace()
+
+    expect(calculator.print()).toBe('1')
+  })
 })

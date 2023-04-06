@@ -26,7 +26,9 @@ export class Calculator {
   }
 
   public doBackspace (): Calculator {
-    if (this.operation) {
+    if (this.secondNumber) {
+      this.secondNumber = Math.floor(this.secondNumber / 10)
+    } else if (this.operation) {
       this.operation = undefined
     } else {
       this.firstNumber = Math.floor(this.firstNumber / 10)

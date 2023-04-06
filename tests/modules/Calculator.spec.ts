@@ -44,4 +44,12 @@ describe('@/modules/Calculator', () => {
 
     expect(calculator.print()).toBe('1')
   })
+
+  it('should print 1 when number 10 added then clear', () => {
+    calculator.addNumber(1)
+      .addNumber(0)
+      .doClear()
+
+    expect(calculator.print()).toBe('0')
+  })
 })

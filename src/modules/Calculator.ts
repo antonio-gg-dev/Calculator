@@ -16,4 +16,10 @@ export class Calculator {
 
     return this
   }
+
+  public doClear (): Calculator {
+    this.firstNumber = 0
+
+    return this
+  }
 }

@@ -1,5 +1,9 @@
 <template>
   <div class="calculator__container">
+    <div style="grid-area: display;">
+      {{ calculator.print() }}
+    </div>
+
     <Button
       v-for="(_, number) in 10"
       :key="number"
@@ -13,7 +17,7 @@
     <Button
       v-for="(symbol, operation) in Operation"
       :key="operation"
-      @click="calculator.setOperation(operation)"
+      @click="calculator.setOperation(symbol)"
       variant="operation"
       :class="`calculator__button-${operation}`"
     >
@@ -41,6 +45,7 @@ export default defineComponent({
   &__container {
     @apply m-auto grid w-fit gap-2;
     grid-template-areas:
+      "display  display  display  display"
       "number-7 number-8 number-9 division"
       "number-4 number-5 number-6 multiplication"
       "number-1 number-2 number-3 subtraction"

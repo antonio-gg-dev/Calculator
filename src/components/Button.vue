@@ -23,7 +23,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .button {
   &__button {
-    @apply block aspect-square w-20 rounded-full text-4xl transition-colors shadow-button;
+    @apply block aspect-square w-20 rounded-full text-4xl transition-all shadow-out;
 
     &--number {
       @apply bg-base;
@@ -42,7 +42,7 @@ export default defineComponent({
     }
 
     &:active {
-      @apply shadow-inset-button;
+      @apply shadow-in;
     }
   }
 }

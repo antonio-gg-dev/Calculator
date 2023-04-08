@@ -18,8 +18,8 @@ module.exports = {
       }
     },
     boxShadow: {
-      button: '0.25rem 0.25rem 0.75rem #cecfd3, -0.25rem -0.25rem 0.75rem #ffffff',
-      'inset-button': 'inset 0.25rem 0.25rem 0.75rem #cecfd3, inset -0.25rem -0.25rem 0.75rem #ffffff'
+      out: '0.25rem 0.25rem 0.75rem #0000002f, -0.25rem -0.25rem 0.75rem #ffffff, inset 0 0 0 transparent, inset 0 0 0 transparent',
+      in: '0 0 0 transparent, 0 0 0 transparent, inset 0.25rem 0.25rem 0.75rem #0000002f, inset -0.25rem -0.25rem 0.75rem #ffffff'
     }
   }
 }

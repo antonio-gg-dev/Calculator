@@ -1,15 +1,72 @@
 <template>
-  <div>
-    uwu
+  <div class="calculator__container">
+    <Button
+      v-for="(_, number) in 10"
+      :key="number"
+      @click="calculator.addNumber(number)"
+      variant="number"
+      :class="`calculator__button-${number}`"
+    >
+      {{ number }}
+    </Button>
+
+    <Button
+      v-for="(symbol, operation) in Operation"
+      :key="operation"
+      @click="calculator.setOperation(operation)"
+      variant="operation"
+      :class="`calculator__button-${operation}`"
+    >
+      {{ symbol }}
+    </Button>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
+import Button from '@/components/Button.vue'
+import { Calculator, Operation } from '@/modules/Calculator'
 
 export default defineComponent({
+  components: { Button },
+  data: () => ({
+    calculator: new Calculator(),
+    Operation
+  })
 })
 </script>
 
 <style scoped lang="scss">
+.calculator {
+  &__container {
+    @apply m-auto grid w-fit gap-2;
+    grid-template-areas:
+      "number-7 number-8 number-9 division"
+      "number-4 number-5 number-6 multiplication"
+      "number-1 number-2 number-3 subtraction"
+      ".        number-0 .        addition";
+  }
+
+  @for $number from 0 through 9 {
+    &__button-#{$number} {
+      grid-area: number-#{$number};
+    }
+  }
+
+  &__button-division {
+    grid-area: division;
+  }
+
+  &__button-multiplication {
+    grid-area: multiplication;
+  }
+
+  &__button-subtraction {
+    grid-area: subtraction;
+  }
+
+  &__button-addition {
+    grid-area: addition;
+  }
+}
 </style>

@@ -20,7 +20,7 @@ export class Calculator {
 
   public addNumber (number: 0|1|2|3|4|5|6|7|8|9): Calculator {
     if (this.clearOnNumber) {
-      this.doClear()
+      this.clear()
     }
 
     if (this.operation) {
@@ -32,7 +32,11 @@ export class Calculator {
     return this
   }
 
-  public doBackspace (): Calculator {
+  public erase (): Calculator {
+    if (this.clearOnNumber) {
+      this.clear()
+    }
+
     if (this.secondNumber) {
       this.secondNumber = Math.floor(this.secondNumber / 10)
     } else if (this.operation) {
@@ -44,7 +48,7 @@ export class Calculator {
     return this
   }
 
-  public doClear (): Calculator {
+  public clear (): Calculator {
     this.firstNumber = 0
     this.operation = undefined
     this.secondNumber = 0

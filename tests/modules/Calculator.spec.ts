@@ -55,7 +55,7 @@ describe('@/modules/Calculator', () => {
     })
   })
 
-  describe('Doing Backspace', () => {
+  describe('Erasing', () => {
     it.each`
       given
       ${0}
@@ -63,9 +63,9 @@ describe('@/modules/Calculator', () => {
       ${5}
       ${8}
       ${6}
-    `('should print "0" when number $given added then backspace', ({ given }) => {
+    `('should print "0" when number $given added then erase', ({ given }) => {
       calculator.addNumber(given)
-        .doBackspace()
+        .erase()
 
       expect(calculator.print()).toBe('0')
     })
@@ -77,10 +77,10 @@ describe('@/modules/Calculator', () => {
       ${4}       | ${4}        | ${'4'}
       ${6}       | ${3}        | ${'6'}
       ${8}       | ${0}        | ${'8'}
-    `('should print "$expected" when numbers $givenFirst and $givenSecond added then backspace', ({ givenFirst, givenSecond, expected }) => {
+    `('should print "$expected" when numbers $givenFirst and $givenSecond added then erase', ({ givenFirst, givenSecond, expected }) => {
       calculator.addNumber(givenFirst)
         .addNumber(givenSecond)
-        .doBackspace()
+        .erase()
 
       expect(calculator.print()).toBe(expected)
     })
@@ -91,10 +91,10 @@ describe('@/modules/Calculator', () => {
       ${1}        | ${Operation.subtraction}    | ${'1'}
       ${3}        | ${Operation.division}       | ${'3'}
       ${8}        | ${Operation.multiplication} | ${'8'}
-    `('should print "$expected" only removing the operator "$givenOperator" when backspace after number $givenNumber and operator', ({ givenNumber, givenOperator, expected }) => {
+    `('should print "$expected" only removing the operator "$givenOperator" when erase after number $givenNumber and operator', ({ givenNumber, givenOperator, expected }) => {
       calculator.addNumber(givenNumber)
         .setOperation(givenOperator)
-        .doBackspace()
+        .erase()
 
       expect(calculator.print()).toBe(expected)
     })
@@ -106,43 +106,53 @@ describe('@/modules/Calculator', () => {
       ${Operation.subtraction}    | ${7}        | ${'0 −'}
       ${Operation.division}       | ${8}        | ${'0 ÷'}
       ${Operation.multiplication} | ${9}        | ${'0 ×'}
-    `('should print "$expected" only removing the second number $givenNumber when backspace after operator "$givenOperator" and second number $givenNumber', ({ givenOperator, givenNumber, expected }) => {
+    `('should print "$expected" only removing the second number $givenNumber when erase after operator "$givenOperator" and second number $givenNumber', ({ givenOperator, givenNumber, expected }) => {
       calculator.setOperation(givenOperator)
         .addNumber(givenNumber)
-        .doBackspace()
+        .erase()
 
       expect(calculator.print()).toBe(expected)
     })
 
-    it('should write the number again if you backspace after the operator', () => {
+    it('should write the number again when erase after the operator', () => {
       calculator.setOperation(Operation.multiplication)
-        .doBackspace()
+        .erase()
         .addNumber(2)
 
       expect(calculator.print()).toBe('2')
     })
 
-    it('should write on first number if you backspace enough to remove the second number and the operator', () => {
+    it('should write on first number when erase enough to remove the second number and the operator', () => {
       calculator.addNumber(9)
         .setOperation(Operation.addition)
         .addNumber(2)
-        .doBackspace()
-        .doBackspace()
+        .erase()
+        .erase()
         .addNumber(3)
 
       expect(calculator.print()).toBe('93')
     })
 
-    it('should rewrite the operator if you backspace enough to remove the second number', () => {
+    it('should rewrite the operator when erase enough to remove the second number', () => {
       calculator.addNumber(3)
         .setOperation(Operation.multiplication)
         .addNumber(9)
         .addNumber(9)
-        .doBackspace()
-        .doBackspace()
+        .erase()
+        .erase()
         .setOperation(Operation.division)
 
       expect(calculator.print()).toBe('3 ÷')
+    })
+
+    it('should clear the previous result', () => {
+      calculator.addNumber(5)
+        .setOperation(Operation.multiplication)
+        .addNumber(5)
+        .calculate()
+        .erase()
+
+      expect(calculator.print()).toBe('0')
     })
   })
 
@@ -158,7 +168,7 @@ describe('@/modules/Calculator', () => {
       calculator.addNumber(givenFirst)
         .addNumber(givenSecond)
         .addNumber(givenThird)
-        .doClear()
+        .clear()
 
       expect(calculator.print()).toBe('0')
     })
@@ -171,7 +181,7 @@ describe('@/modules/Calculator', () => {
       ${Operation.multiplication}
     `('should print "0" when operation "$given" then clear', ({ given }) => {
       calculator.setOperation(given)
-        .doClear()
+        .clear()
 
       expect(calculator.print()).toBe('0')
     })
@@ -186,7 +196,7 @@ describe('@/modules/Calculator', () => {
     `('should print "0" when when operation "$givenOperator" and second number $givenNumber then clear', ({ givenOperator, givenNumber }) => {
       calculator.setOperation(givenOperator)
         .addNumber(givenNumber)
-        .doClear()
+        .clear()
 
       expect(calculator.print()).toBe('0')
     })

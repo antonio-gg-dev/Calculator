@@ -26,7 +26,7 @@
 
     <Button
       key="clear"
-      @click="calculator.doClear()"
+      @click="calculator.clear()"
       variant="clear"
       :class="`calculator__button-clear`"
     >
@@ -34,10 +34,10 @@
     </Button>
 
     <Button
-      key="backspace"
-      @click="calculator.doBackspace()"
+      key="erase"
+      @click="calculator.erase()"
       variant="operation"
-      :class="`calculator__button-backspace`"
+      :class="`calculator__button-erase`"
     >
       ⌫
     </Button>
@@ -74,7 +74,7 @@ export default defineComponent({
     grid-template-areas:
       "display  display  display  display        display"
       "number-7 number-8 number-9 division       clear"
-      "number-4 number-5 number-6 multiplication backspace"
+      "number-4 number-5 number-6 multiplication erase"
       "number-1 number-2 number-3 subtraction    calculate"
       ".        number-0 .        addition       calculate";
   }
@@ -105,8 +105,8 @@ export default defineComponent({
     grid-area: clear;
   }
 
-  &__button-backspace {
-    grid-area: backspace;
+  &__button-erase {
+    grid-area: erase;
   }
 
   &__button-calculate {

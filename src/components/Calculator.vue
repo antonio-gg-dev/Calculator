@@ -23,6 +23,33 @@
     >
       {{ symbol }}
     </Button>
+
+    <Button
+      key="clear"
+      @click="calculator.doClear()"
+      variant="clear"
+      :class="`calculator__button-clear`"
+    >
+      C
+    </Button>
+
+    <Button
+      key="backspace"
+      @click="calculator.doBackspace()"
+      variant="operation"
+      :class="`calculator__button-backspace`"
+    >
+      ⌫
+    </Button>
+
+    <Button
+      key="calculate"
+      @click="() => {}"
+      variant="operation"
+      :class="`calculator__button-calculate`"
+    >
+      =
+    </Button>
   </div>
 </template>
 
@@ -45,11 +72,11 @@ export default defineComponent({
   &__container {
     @apply m-auto grid w-fit gap-2;
     grid-template-areas:
-      "display  display  display  display"
-      "number-7 number-8 number-9 division"
-      "number-4 number-5 number-6 multiplication"
-      "number-1 number-2 number-3 subtraction"
-      ".        number-0 .        addition";
+      "display  display  display  display        display"
+      "number-7 number-8 number-9 division       clear"
+      "number-4 number-5 number-6 multiplication backspace"
+      "number-1 number-2 number-3 subtraction    calculate"
+      ".        number-0 .        addition       calculate";
   }
 
   @for $number from 0 through 9 {
@@ -72,6 +99,19 @@ export default defineComponent({
 
   &__button-addition {
     grid-area: addition;
+  }
+
+  &__button-clear {
+    grid-area: clear;
+  }
+
+  &__button-backspace {
+    grid-area: backspace;
+  }
+
+  &__button-calculate {
+    @apply aspect-auto;
+    grid-area: calculate;
   }
 }
 </style>

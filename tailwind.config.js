@@ -9,12 +9,26 @@ module.exports = {
       base: {
         DEFAULT: '#f2f4f8',
         highlight: '#f7f8fa',
-        alt: '#1a1a1a'
+        alt: {
+          DEFAULT: '#1a1a1a',
+          highlight: '#1a1a1a'
+        }
       },
       primary: {
         DEFAULT: '#e3e8f0',
         highlight: '#eef1f6',
-        alt: '#1a1a1a'
+        alt: {
+          DEFAULT: '#1a1a1a',
+          highlight: '#1a1a1a'
+        }
+      },
+      danger: {
+        DEFAULT: '#f5e5de',
+        highlight: '#f9efeb',
+        alt: {
+          DEFAULT: '#1a1a1a',
+          highlight: '#1a1a1a'
+        }
       }
     },
     boxShadow: {

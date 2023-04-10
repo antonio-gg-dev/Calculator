@@ -9,6 +9,8 @@ export class Calculator {
   private operation: Operation | undefined
   private secondNumber = 0
   private clearOnNumber = false
+  private previousOperation: Operation | undefined
+  private previousSecondNumber = 0
 
   public print (): string {
     return [this.firstNumber, this.operation, this.secondNumber || undefined]
@@ -52,13 +54,22 @@ export class Calculator {
   }
 
   public setOperation (operation: Operation): Calculator {
-    this.operation = operation
+    if (this.secondNumber) {
+      this.calculate()
+    }
+
     this.clearOnNumber = false
+    this.operation = operation
 
     return this
   }
 
   public calculate (): Calculator {
+    if (!this.operation && this.previousOperation) {
+      this.operation = this.previousOperation
+      this.secondNumber = this.previousSecondNumber
+    }
+
     switch (this.operation) {
       case Operation.addition:
         this.firstNumber += this.secondNumber
@@ -74,9 +85,12 @@ export class Calculator {
         break
     }
 
-    this.clearOnNumber = true
+    this.previousOperation = this.operation
+    this.previousSecondNumber = this.secondNumber
+
     this.operation = undefined
     this.secondNumber = 0
+    this.clearOnNumber = true
 
     return this
   }

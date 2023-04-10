@@ -217,6 +217,25 @@ describe('@/modules/Calculator', () => {
 
       expect(calculator.print()).toBe(expected)
     })
+
+    it('should calculate first before set operation again when second number is set', () => {
+      calculator.addNumber(1)
+        .setOperation(Operation.addition)
+        .addNumber(2)
+        .setOperation(Operation.addition)
+
+      expect(calculator.print()).toBe('3 +')
+    })
+
+    it('should add a second number when calculate before set operation when second number is set', () => {
+      calculator.addNumber(1)
+        .setOperation(Operation.addition)
+        .addNumber(2)
+        .setOperation(Operation.addition)
+        .addNumber(3)
+
+      expect(calculator.print()).toBe('3 + 3')
+    })
   })
 
   describe('Adding Numbers After Operator', () => {
@@ -284,5 +303,15 @@ describe('@/modules/Calculator', () => {
       .calculate()
 
     expect(calculator.print()).toBe('5')
+  })
+
+  it('should repeat the last operation each time calculate is called', () => {
+    calculator.addNumber(2)
+      .setOperation(Operation.addition)
+      .addNumber(3)
+      .calculate()
+      .calculate()
+
+    expect(calculator.print()).toBe('8')
   })
 })

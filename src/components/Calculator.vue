@@ -1,6 +1,6 @@
 <template>
   <div class="calculator__container">
-    <div style="grid-area: display;">
+    <div class="calculator__display">
       {{ calculator.print() }}
     </div>
 
@@ -54,14 +54,19 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
 import Button from '@/components/Button.vue'
 import { Calculator, Operation } from '@/modules/Calculator'
 
 export default defineComponent({
   components: { Button },
+  props: {
+    calculator: {
+      required: true,
+      type: Object as PropType<Calculator>
+    }
+  },
   data: () => ({
-    calculator: new Calculator(),
     Operation
   })
 })
@@ -70,13 +75,18 @@ export default defineComponent({
 <style scoped lang="scss">
 .calculator {
   &__container {
-    @apply m-auto grid w-fit gap-2;
+    @apply grid w-fit gap-4;
     grid-template-areas:
       "display  display  display  display        display"
       "number-7 number-8 number-9 division       clear"
       "number-4 number-5 number-6 multiplication erase"
       "number-1 number-2 number-3 subtraction    calculate"
       ".        number-0 .        addition       calculate";
+  }
+
+  &__display {
+    @apply px-6 pb-5 text-right text-4xl leading-none;
+    grid-area: display;
   }
 
   @for $number from 0 through 9 {

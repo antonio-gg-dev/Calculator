@@ -1,6 +1,9 @@
 <template>
   <div class="calculator__container">
-    <div class="calculator__display">
+    <div
+      class="calculator__display"
+      data-test="display"
+    >
       {{ calculator.print() }}
     </div>
 
@@ -10,6 +13,7 @@
       @click="calculator.addNumber(number)"
       variant="number"
       :class="`calculator__button-${number}`"
+      :data-test="`number-${number}`"
     >
       {{ number }}
     </Button>
@@ -20,6 +24,7 @@
       @click="calculator.setOperation(symbol)"
       variant="operation"
       :class="`calculator__button-${operation}`"
+      :data-test="`operation-${operation}`"
     >
       {{ symbol }}
     </Button>
@@ -29,6 +34,7 @@
       @click="calculator.clear()"
       variant="clear"
       :class="`calculator__button-clear`"
+      data-test="clear"
     >
       C
     </Button>
@@ -38,6 +44,7 @@
       @click="calculator.erase()"
       variant="operation"
       :class="`calculator__button-erase`"
+      data-test="erase"
     >
       ⌫
     </Button>
@@ -47,6 +54,7 @@
       @click="calculator.calculate()"
       variant="operation"
       :class="`calculator__button-calculate`"
+      data-test="calculate"
     >
       =
     </Button>

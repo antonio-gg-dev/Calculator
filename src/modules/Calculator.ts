@@ -8,6 +8,7 @@ export class Calculator {
   private firstNumber = 0
   private operation: Operation | undefined
   private secondNumber = 0
+  private clearOnNumber = false
 
   public print (): string {
     return [this.firstNumber, this.operation, this.secondNumber || undefined]
@@ -16,6 +17,10 @@ export class Calculator {
   }
 
   public addNumber (number: 0|1|2|3|4|5|6|7|8|9): Calculator {
+    if (this.clearOnNumber) {
+      this.doClear()
+    }
+
     if (this.operation) {
       this.secondNumber = Number(`${this.secondNumber}${number}`)
     } else {
@@ -41,12 +46,14 @@ export class Calculator {
     this.firstNumber = 0
     this.operation = undefined
     this.secondNumber = 0
+    this.clearOnNumber = false
 
     return this
   }
 
   public setOperation (operation: Operation): Calculator {
     this.operation = operation
+    this.clearOnNumber = false
 
     return this
   }
@@ -67,6 +74,7 @@ export class Calculator {
         break
     }
 
+    this.clearOnNumber = true
     this.operation = undefined
     this.secondNumber = 0
 

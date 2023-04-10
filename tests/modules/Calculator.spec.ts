@@ -252,4 +252,37 @@ describe('@/modules/Calculator', () => {
       expect(calculator.print()).toBe(expected)
     })
   })
+
+  it('should reset the number when add a number after calculate', () => {
+    calculator.addNumber(1)
+      .setOperation(Operation.addition)
+      .addNumber(2)
+      .calculate()
+      .addNumber(1)
+
+    expect(calculator.print()).toBe('1')
+  })
+
+  it('should reset the number only once when add many numbers after calculate', () => {
+    calculator.addNumber(1)
+      .setOperation(Operation.addition)
+      .addNumber(2)
+      .calculate()
+      .addNumber(1)
+      .addNumber(2)
+
+    expect(calculator.print()).toBe('12')
+  })
+
+  it('should concatenate several operations', () => {
+    calculator.addNumber(2)
+      .setOperation(Operation.multiplication)
+      .addNumber(2)
+      .calculate()
+      .setOperation(Operation.addition)
+      .addNumber(1)
+      .calculate()
+
+    expect(calculator.print()).toBe('5')
+  })
 })

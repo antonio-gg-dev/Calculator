@@ -234,4 +234,22 @@ describe('@/modules/Calculator', () => {
       expect(calculator.print()).toBe(expected)
     })
   })
+
+  describe('Calculating!', () => {
+    it.each`
+      givenFirst | givenOperator               | givenSecond | expected
+      ${4}       | ${Operation.addition}       | ${2}        | ${'6'}
+      ${7}       | ${Operation.subtraction}    | ${3}        | ${'4'}
+      ${4}       | ${Operation.division}       | ${2}        | ${'2'}
+      ${7}       | ${Operation.division}       | ${2}        | ${'3.5'}
+      ${5}       | ${Operation.multiplication} | ${9}        | ${'45'}
+    `('should perform the operation "$givenFirst $givenOperator $givenSecond = $expected', ({ givenFirst, givenOperator, givenSecond, expected }) => {
+      calculator.addNumber(givenFirst)
+        .setOperation(givenOperator)
+        .addNumber(givenSecond)
+        .calculate()
+
+      expect(calculator.print()).toBe(expected)
+    })
+  })
 })

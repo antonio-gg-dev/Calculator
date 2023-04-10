@@ -50,4 +50,26 @@ export class Calculator {
 
     return this
   }
+
+  public calculate (): Calculator {
+    switch (this.operation) {
+      case Operation.addition:
+        this.firstNumber += this.secondNumber
+        break
+      case Operation.subtraction:
+        this.firstNumber -= this.secondNumber
+        break
+      case Operation.division:
+        this.firstNumber /= this.secondNumber
+        break
+      case Operation.multiplication:
+        this.firstNumber *= this.secondNumber
+        break
+    }
+
+    this.operation = undefined
+    this.secondNumber = 0
+
+    return this
+  }
 }

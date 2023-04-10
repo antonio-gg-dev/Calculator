@@ -44,7 +44,7 @@
 
     <Button
       key="calculate"
-      @click="() => {}"
+      @click="calculator.calculate()"
       variant="operation"
       :class="`calculator__button-calculate`"
     >

@@ -1,52 +1,56 @@
-import type { Meta, StoryObj } from '@storybook/vue3'
+import type { Meta, StoryFn } from '@storybook/vue3'
 
-import Button from './Button.vue'
+import Button from '../components/Button.vue'
 
-// More on how to set up stories at: https://storybook.js.org/docs/7.0/vue/writing-stories/introduction
-const meta: Meta<typeof Button> = {
-  title: 'Example/Button',
+export default {
   component: Button,
-  // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/7.0/vue/writing-docs/docs-page
-  tags: ['autodocs'],
   argTypes: {
-    size: { control: 'select', options: ['small', 'medium', 'large'] },
-    backgroundColor: { control: 'color' },
-    onClick: { action: 'clicked' }
+    label: {
+      control: {
+        type: 'text'
+      }
+    },
+    variant: {
+      control: {
+        type: 'select'
+      },
+      options: [
+        'number',
+        'operation',
+        'clear'
+      ]
+    }
+  }
+} as Meta<typeof Button>
+
+const Template: StoryFn = (args) => ({
+  components: {
+    Button
   },
-  args: { primary: false } // default value
+  setup: () => ({
+    args
+  }),
+  template: `
+    <Button v-bind="args">
+      {{ args.label }}
+    </Button>
+  `
+})
+
+export const Number = Template.bind({})
+Number.args = {
+  label: '0',
+  variant: 'number'
 }
 
-export default meta
-type Story = StoryObj<typeof Button>;
-/*
- *👇 Render functions are a framework specific feature to allow you control on how the component renders.
- * See https://storybook.js.org/docs/7.0/vue/api/csf
- * to learn how to use render functions.
- */
-export const Primary: Story = {
-  args: {
-    primary: true,
-    label: 'Button'
-  }
+export const Operation = Template.bind({})
+Operation.args = {
+  label: '+',
+  variant: 'operation'
 }
 
-export const Secondary: Story = {
-  args: {
-    primary: false,
-    label: 'Button'
-  }
-}
-
-export const Large: Story = {
-  args: {
-    label: 'Button',
-    size: 'large'
-  }
-}
-
-export const Small: Story = {
-  args: {
-    label: 'Button',
-    size: 'small'
-  }
+export const Clear = Template.bind({})
+Clear.args = {
+  label: 'C',
+  variant: 'clear'
 }

@@ -1,0 +1,43 @@
+import type { Meta, StoryFn } from '@storybook/vue3'
+
+import Calculator from '../components/Calculator.vue'
+import { Calculator as CalculatorService } from '../modules/Calculator'
+
+export default {
+  component: Calculator,
+  argTypes: {
+    screen: {
+      control: {
+        type: 'text'
+      }
+    }
+  }
+} as Meta<typeof Calculator>
+
+const Template: StoryFn = (args) => ({
+  components: {
+    Calculator
+  },
+  setup: () => {
+    const calculator = {
+      print: () => args.screen,
+      addNumber: () => calculator,
+      erase: () => calculator,
+      clear: () => calculator,
+      setOperation: () => calculator,
+      calculate: () => calculator
+    } as unknown as CalculatorService
+
+    return {
+      calculator
+    }
+  },
+  template: `
+    <Calculator :calculator="calculator" />
+  `
+})
+
+export const Default = Template.bind({})
+Default.args = {
+  screen: 'screen'
+}

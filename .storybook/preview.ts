@@ -1,3 +1,4 @@
+import '../src/style.scss'
 import type { Preview } from "@storybook/vue3";
 
 const preview: Preview = {

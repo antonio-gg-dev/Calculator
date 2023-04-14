@@ -1,5 +1,7 @@
 const custom = require('../node_modules/@vue/cli-service/webpack.config.js');
 import type { StorybookConfig } from "@storybook/vue3-webpack5";
+const { TsconfigPathsPlugin } = require("tsconfig-paths-webpack-plugin");
+
 const config: StorybookConfig = {
   stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/addon-interactions", {
@@ -21,6 +23,13 @@ const config: StorybookConfig = {
       module: {
         ...config.module,
         rules: custom.module.rules
+      },
+      resolve: {
+        ...config.resolve,
+        plugins: [
+          ...config.resolve?.plugins ?? [],
+          new TsconfigPathsPlugin({ extensions: config.resolve?.extensions }),
+        ]
       }
     };
   }

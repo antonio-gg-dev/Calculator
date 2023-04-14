@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/vue3'
 
-import Calculator from '../components/Calculator.vue'
-import { Calculator as CalculatorService } from '../modules/Calculator'
+import Calculator from '@/components/Calculator.vue'
+import { Calculator as CalculatorService } from '@/modules/Calculator'
 
 export default {
   component: Calculator,
@@ -39,5 +39,5 @@ const Template: StoryFn = (args) => ({
 
 export const Default = Template.bind({})
 Default.args = {
-  screen: 'screen'
+  screen: 'Screen'
 }

@@ -63,8 +63,8 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import Button from './Button.vue'
-import { Calculator, Operation } from '../modules/Calculator'
+import Button from '@/components/Button.vue'
+import { Calculator, Operation } from '@/modules/Calculator'
 
 export default defineComponent({
   components: { Button },

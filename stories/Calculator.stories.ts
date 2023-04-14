@@ -1,7 +1,7 @@
 import type { Meta, StoryFn } from '@storybook/vue3'
 
-import Calculator from '@/components/Calculator.vue'
-import { Calculator as CalculatorService } from '@/modules/Calculator'
+import Calculator from '../src/components/Calculator.vue'
+import { Calculator as CalculatorService } from '../src/modules/Calculator'
 
 export default {
   component: Calculator,

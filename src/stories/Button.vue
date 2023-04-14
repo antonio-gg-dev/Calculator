@@ -3,8 +3,8 @@
 </template>
 
 <script lang="ts" setup>
-import "./button.css"
-import { computed } from 'vue';
+import './button.css'
+import { computed } from 'vue'
 
 const props = withDefaults(defineProps<{
   /**
@@ -24,25 +24,25 @@ const props = withDefaults(defineProps<{
    */
   backgroundColor?: string,
 
-}>(), { primary: false });
+}>(), { primary: false })
 
 const emit = defineEmits<{
   (e: 'click', id: number): void;
-}>();
+}>()
 
 const classes = computed(() => ({
   'storybook-button': true,
   'storybook-button--primary': props.primary,
   'storybook-button--secondary': !props.primary,
-  [`storybook-button--${props.size || 'medium'}`]: true,
-}));
+  [`storybook-button--${props.size || 'medium'}`]: true
+}))
 
 const style = computed(() => ({
   backgroundColor: props.backgroundColor
-}));
+}))
 
 const onClick = () => {
-  emit("click", 1)
-};
+  emit('click', 1)
+}
 
 </script>

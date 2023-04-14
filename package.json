@@ -7,8 +7,10 @@
     "build": "vue-cli-service build",
     "test": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
+    "typecheck": "tsc",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=2c65e473e048"
   },
   "dependencies": {
     "core-js": "^3.8.3",
@@ -40,6 +42,7 @@
     "@vue/vue3-jest": "^27.0.0-alpha.1",
     "autoprefixer": "^10.4.14",
     "babel-jest": "^27.0.6",
+    "chromatic": "^6.17.3",
     "eslint": "^7.32.0",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-node": "^11.1.0",
@@ -59,5 +62,7 @@
     "tsconfig-paths-webpack-plugin": "^4.0.1",
     "typescript": "~4.5.5",
     "vue-loader": "^17.0.1"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "calculator@0.1.0"
 }

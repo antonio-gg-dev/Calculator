@@ -10,7 +10,8 @@
     "typecheck": "tsc",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "chromatic": "npx chromatic --project-token=2c65e473e048"
+    "chromatic": "npx chromatic --project-token=2c65e473e048",
+    "belial": "yarn lint && yarn typecheck && yarn test"
   },
   "dependencies": {
     "core-js": "^3.8.3",

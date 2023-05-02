@@ -41,7 +41,7 @@ describe('@/components/Calculator.vue', () => {
     ${9}
   `('should call addNumber with number $number when $number button clicked ', ({ number }) => {
     calculatorComponent.find(`[data-test="number-${number}"]`)
-      .trigger('click')
+      .trigger('mousedown')
 
     expect(calculatorService.addNumber).toHaveBeenCalledWith(number)
   })
@@ -54,28 +54,28 @@ describe('@/components/Calculator.vue', () => {
     ${'multiplication'} | ${Operation.multiplication}
   `('should call setOperation with operator "$symbol" when $operation button clicked ', ({ symbol, operation }) => {
     calculatorComponent.find(`[data-test="operation-${operation}"]`)
-      .trigger('click')
+      .trigger('mousedown')
 
     expect(calculatorService.setOperation).toHaveBeenCalledWith(symbol)
   })
 
   it('should call erase when erase button clicked ', () => {
     calculatorComponent.find('[data-test="erase"]')
-      .trigger('click')
+      .trigger('mousedown')
 
     expect(calculatorService.erase).toHaveBeenCalled()
   })
 
   it('should call clear when clear button clicked ', () => {
     calculatorComponent.find('[data-test="clear"]')
-      .trigger('click')
+      .trigger('mousedown')
 
     expect(calculatorService.clear).toHaveBeenCalled()
   })
 
   it('should call calculate when calculate button clicked ', () => {
     calculatorComponent.find('[data-test="calculate"]')
-      .trigger('click')
+      .trigger('mousedown')
 
     expect(calculatorService.calculate).toHaveBeenCalled()
   })

@@ -10,7 +10,7 @@
     <Button
       v-for="(_, number) in 10"
       :key="number"
-      @click="calculator.addNumber(number)"
+      @mousedown.left="calculator.addNumber(number)"
       variant="number"
       :class="`calculator__button-${number}`"
       :data-test="`number-${number}`"
@@ -21,7 +21,7 @@
     <Button
       v-for="(symbol, operation) in Operation"
       :key="operation"
-      @click="calculator.setOperation(symbol)"
+      @mousedown.left="calculator.setOperation(symbol)"
       variant="operation"
       :class="`calculator__button-${operation}`"
       :data-test="`operation-${operation}`"
@@ -31,7 +31,7 @@
 
     <Button
       key="clear"
-      @click="calculator.clear()"
+      @mousedown.left="calculator.clear()"
       variant="clear"
       :class="`calculator__button-clear`"
       data-test="clear"
@@ -41,7 +41,7 @@
 
     <Button
       key="erase"
-      @click="calculator.erase()"
+      @mousedown.left="calculator.erase()"
       variant="operation"
       :class="`calculator__button-erase`"
       data-test="erase"
@@ -51,7 +51,7 @@
 
     <Button
       key="calculate"
-      @click="calculator.calculate()"
+      @mousedown.left="calculator.calculate()"
       variant="operation"
       :class="`calculator__button-calculate`"
       data-test="calculate"

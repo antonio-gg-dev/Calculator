@@ -76,7 +76,38 @@ export default defineComponent({
   },
   data: () => ({
     Operation
-  })
+  }),
+  methods: {
+    keyHandler ({ key }: KeyboardEvent) {
+      if (key === '0') this.calculator.addNumber(0)
+      if (key === '1') this.calculator.addNumber(1)
+      if (key === '2') this.calculator.addNumber(2)
+      if (key === '3') this.calculator.addNumber(3)
+      if (key === '4') this.calculator.addNumber(4)
+      if (key === '5') this.calculator.addNumber(5)
+      if (key === '6') this.calculator.addNumber(6)
+      if (key === '7') this.calculator.addNumber(7)
+      if (key === '8') this.calculator.addNumber(8)
+      if (key === '9') this.calculator.addNumber(9)
+
+      if (key === 'Delete') this.calculator.clear()
+      if (key === 'Backspace') this.calculator.erase()
+
+      if (key === '*') this.calculator.setOperation(Operation.multiplication)
+      if (key === '+') this.calculator.setOperation(Operation.addition)
+      if (key === '/') this.calculator.setOperation(Operation.division)
+      if (key === '-') this.calculator.setOperation(Operation.subtraction)
+
+      if (key === '=') this.calculator.calculate()
+      if (key === 'Enter') this.calculator.calculate()
+    }
+  },
+  mounted () {
+    window.addEventListener('keydown', this.keyHandler)
+  },
+  unmounted () {
+    window.removeEventListener('keydown', this.keyHandler)
+  }
 })
 </script>
 

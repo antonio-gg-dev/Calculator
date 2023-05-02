@@ -5,15 +5,20 @@ export enum Operation {
   multiplication = '×',
 }
 export class Calculator {
-  private firstNumber = 0
+  private firstNumber = '0'
   private operation: Operation | undefined
-  private secondNumber = 0
+  private secondNumber = '0'
   private clearOnNumber = false
   private previousOperation: Operation | undefined
-  private previousSecondNumber = 0
+  private previousSecondNumber = '0'
+  private isNextDecimal = false;
 
   public print (): string {
-    return [this.firstNumber, this.operation, this.secondNumber || undefined]
+    return [
+      this.firstNumber + (this.isNextDecimal ? ',' : ''),
+      this.operation,
+      this.secondNumber !== '0' ? this.secondNumber : undefined
+    ]
       .filter(v => v !== undefined)
       .join(' ')
   }
@@ -24,10 +29,14 @@ export class Calculator {
     }
 
     if (this.operation) {
-      this.secondNumber = Number(`${this.secondNumber}${number}`)
+      this.secondNumber = `${this.secondNumber !== '0' ? this.secondNumber : ''}${number}`
     } else {
-      this.firstNumber = Number(`${this.firstNumber}${number}`)
+      this.firstNumber = (this.isNextDecimal || this.firstNumber !== '0' ? this.firstNumber : '') +
+        (this.isNextDecimal ? '.' : '') +
+        (number)
     }
+
+    this.isNextDecimal = false
 
     return this
   }
@@ -37,28 +46,28 @@ export class Calculator {
       this.clear()
     }
 
-    if (this.secondNumber) {
-      this.secondNumber = Math.floor(this.secondNumber / 10)
+    if (this.secondNumber !== '0') {
+      this.secondNumber = this.secondNumber.substring(0, this.secondNumber.length - 1) || '0'
     } else if (this.operation) {
       this.operation = undefined
     } else {
-      this.firstNumber = Math.floor(this.firstNumber / 10)
+      this.firstNumber = this.firstNumber.substring(0, this.firstNumber.length - 1) || '0'
     }
 
     return this
   }
 
   public clear (): Calculator {
-    this.firstNumber = 0
+    this.firstNumber = '0'
     this.operation = undefined
-    this.secondNumber = 0
+    this.secondNumber = '0'
     this.clearOnNumber = false
 
     return this
   }
 
   public setOperation (operation: Operation): Calculator {
-    if (this.secondNumber) {
+    if (this.secondNumber !== '0') {
       this.calculate()
     }
 
@@ -76,16 +85,16 @@ export class Calculator {
 
     switch (this.operation) {
       case Operation.addition:
-        this.firstNumber += this.secondNumber
+        this.firstNumber = `${Number(this.firstNumber) + Number(this.secondNumber)}`
         break
       case Operation.subtraction:
-        this.firstNumber -= this.secondNumber
+        this.firstNumber = `${Number(this.firstNumber) - Number(this.secondNumber)}`
         break
       case Operation.division:
-        this.firstNumber /= this.secondNumber
+        this.firstNumber = `${Number(this.firstNumber) / Number(this.secondNumber)}`
         break
       case Operation.multiplication:
-        this.firstNumber *= this.secondNumber
+        this.firstNumber = `${Number(this.firstNumber) * Number(this.secondNumber)}`
         break
     }
 
@@ -93,8 +102,14 @@ export class Calculator {
     this.previousSecondNumber = this.secondNumber
 
     this.operation = undefined
-    this.secondNumber = 0
+    this.secondNumber = '0'
     this.clearOnNumber = true
+
+    return this
+  }
+
+  public addDecimal (): Calculator {
+    this.isNextDecimal = true
 
     return this
   }

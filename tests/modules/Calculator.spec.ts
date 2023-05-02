@@ -324,4 +324,19 @@ describe('@/modules/Calculator', () => {
 
     expect(calculator.print()).toBe('8')
   })
+
+  describe('Decimals', () => {
+    it('should write decimal separator', () => {
+      calculator.addDecimal()
+
+      expect(calculator.print()).toBe('0,')
+    })
+
+    it('should write decimal numbre after separator', () => {
+      calculator.addDecimal()
+        .addNumber(0)
+
+      expect(calculator.print()).toBe('0.0')
+    })
+  })
 })

@@ -12,10 +12,15 @@ export class Calculator {
   private previousOperation: Operation | undefined
   private previousSecondNumber = '0'
   private isNextDecimal = false;
+  private readonly decimalSeparator: string
+
+  constructor (locale: string | undefined = undefined) {
+    this.decimalSeparator = (1.1).toLocaleString(locale).substring(1, 2)
+  }
 
   public print (): string {
     return [
-      this.firstNumber + (this.isNextDecimal ? ',' : ''),
+      this.firstNumber + (this.isNextDecimal ? this.decimalSeparator : ''),
       this.operation,
       this.secondNumber !== '0' ? this.secondNumber : undefined
     ]
@@ -32,7 +37,7 @@ export class Calculator {
       this.secondNumber = `${this.secondNumber !== '0' ? this.secondNumber : ''}${number}`
     } else {
       this.firstNumber = (this.isNextDecimal || this.firstNumber !== '0' ? this.firstNumber : '') +
-        (this.isNextDecimal ? '.' : '') +
+        (this.isNextDecimal ? this.decimalSeparator : '') +
         (number)
     }
 

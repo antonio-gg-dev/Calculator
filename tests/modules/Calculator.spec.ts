@@ -4,7 +4,7 @@ describe('@/modules/Calculator', () => {
   let calculator: Calculator
 
   beforeEach(() => {
-    calculator = new Calculator()
+    calculator = new Calculator('en')
   })
 
   it('should print "0" at start', () => {
@@ -329,14 +329,35 @@ describe('@/modules/Calculator', () => {
     it('should write decimal separator', () => {
       calculator.addDecimal()
 
-      expect(calculator.print()).toBe('0,')
+      expect(calculator.print()).toBe('0.')
     })
 
-    it('should write decimal numbre after separator', () => {
-      calculator.addDecimal()
-        .addNumber(0)
+    it.each`
+      given | expected
+      ${0}  | ${'0.'}
+      ${2}  | ${'2.'}
+      ${4}  | ${'4.'}
+      ${5}  | ${'5.'}
+      ${9}  | ${'9.'}
+    `('should print "$expected" when add number $given then decimal', ({ given, expected }) => {
+      calculator.addNumber(given)
+        .addDecimal()
 
-      expect(calculator.print()).toBe('0.0')
+      expect(calculator.print()).toBe(expected)
+    })
+
+    it.each`
+      given | expected
+      ${0}  | ${'0.0'}
+      ${4}  | ${'0.4'}
+      ${5}  | ${'0.5'}
+      ${6}  | ${'0.6'}
+      ${9}  | ${'0.9'}
+    `('should print "$expected" when add decimal then number', ({ given, expected }) => {
+      calculator.addDecimal()
+        .addNumber(given)
+
+      expect(calculator.print()).toBe(expected)
     })
   })
 })

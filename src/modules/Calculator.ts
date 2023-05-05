@@ -41,7 +41,17 @@ export class Calculator {
     }
 
     if (this.operation) {
-      this.secondNumber = `${this.secondNumber !== '0' ? this.secondNumber : ''}${number}`
+      let secondNumber = this.secondNumber
+
+      if (secondNumber === '0') {
+        secondNumber = ''
+      }
+
+      if (secondNumber === '-0') {
+        secondNumber = '-'
+      }
+
+      this.secondNumber = `${secondNumber}${number}`
     } else {
       let firstNumber = this.firstNumber
 
@@ -143,10 +153,18 @@ export class Calculator {
   }
 
   public toggleSymbol (): Calculator {
-    if (this.firstNumber.charAt(0) === '-') {
-      this.firstNumber = this.firstNumber.slice(1)
+    if (this.operation) {
+      if (this.secondNumber.charAt(0) === '-') {
+        this.secondNumber = this.secondNumber.slice(1)
+      } else {
+        this.secondNumber = `-${this.secondNumber}`
+      }
     } else {
-      this.firstNumber = `-${this.firstNumber}`
+      if (this.firstNumber.charAt(0) === '-') {
+        this.firstNumber = this.firstNumber.slice(1)
+      } else {
+        this.firstNumber = `-${this.firstNumber}`
+      }
     }
 
     return this

@@ -558,5 +558,28 @@ describe('@/modules/Calculator', () => {
 
       expect(calculator.print()).toEqual('−7')
     })
+
+    it('should toggle the symbol of second number once', () => {
+      calculator.setOperation(Operation.subtraction)
+        .toggleSymbol()
+
+      expect(calculator.print()).toEqual('0 − −0')
+    })
+
+    it('should toggle the symbol of second number twice', () => {
+      calculator.setOperation(Operation.subtraction)
+        .toggleSymbol()
+        .toggleSymbol()
+
+      expect(calculator.print()).toEqual('0 −')
+    })
+
+    it('should toggle the second number then add number properly', () => {
+      calculator.setOperation(Operation.subtraction)
+        .toggleSymbol()
+        .addNumber(7)
+
+      expect(calculator.print()).toEqual('0 − −7')
+    })
   })
 })

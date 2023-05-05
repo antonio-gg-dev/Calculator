@@ -8,7 +8,7 @@ describe('@/modules/Calculator', () => {
   })
 
   it('should print "0" at start', () => {
-    expect(calculator.print()).toBe('0')
+    expect(calculator.print()).toEqual('0')
   })
 
   describe('Adding Numbers', () => {
@@ -22,7 +22,7 @@ describe('@/modules/Calculator', () => {
     `('should print "$expected" when number $given added', ({ given, expected }) => {
       calculator.addNumber(given)
 
-      expect(calculator.print()).toBe(expected)
+      expect(calculator.print()).toEqual(expected)
     })
 
     it.each`
@@ -36,7 +36,7 @@ describe('@/modules/Calculator', () => {
       calculator.addNumber(givenFirst)
         .addNumber(givenSecond)
 
-      expect(calculator.print()).toBe(expected)
+      expect(calculator.print()).toEqual(expected)
     })
 
     it.each`
@@ -51,7 +51,7 @@ describe('@/modules/Calculator', () => {
         .addNumber(givenSecond)
         .addNumber(givenThird)
 
-      expect(calculator.print()).toBe(expected)
+      expect(calculator.print()).toEqual(expected)
     })
   })
 
@@ -67,7 +67,7 @@ describe('@/modules/Calculator', () => {
       calculator.addNumber(given)
         .erase()
 
-      expect(calculator.print()).toBe('0')
+      expect(calculator.print()).toEqual('0')
     })
 
     it.each`
@@ -82,7 +82,7 @@ describe('@/modules/Calculator', () => {
         .addNumber(givenSecond)
         .erase()
 
-      expect(calculator.print()).toBe(expected)
+      expect(calculator.print()).toEqual(expected)
     })
 
     it.each`
@@ -96,7 +96,7 @@ describe('@/modules/Calculator', () => {
         .setOperation(givenOperator)
         .erase()
 
-      expect(calculator.print()).toBe(expected)
+      expect(calculator.print()).toEqual(expected)
     })
 
     it.each`
@@ -111,7 +111,7 @@ describe('@/modules/Calculator', () => {
         .addNumber(givenNumber)
         .erase()
 
-      expect(calculator.print()).toBe(expected)
+      expect(calculator.print()).toEqual(expected)
     })
 
     it('should write the number again when erase after the operator', () => {
@@ -119,7 +119,7 @@ describe('@/modules/Calculator', () => {
         .erase()
         .addNumber(2)
 
-      expect(calculator.print()).toBe('2')
+      expect(calculator.print()).toEqual('2')
     })
 
     it('should write on first number when erase enough to remove the second number and the operator', () => {
@@ -130,7 +130,7 @@ describe('@/modules/Calculator', () => {
         .erase()
         .addNumber(3)
 
-      expect(calculator.print()).toBe('93')
+      expect(calculator.print()).toEqual('93')
     })
 
     it('should rewrite the operator when erase enough to remove the second number', () => {
@@ -142,7 +142,7 @@ describe('@/modules/Calculator', () => {
         .erase()
         .setOperation(Operation.division)
 
-      expect(calculator.print()).toBe('3 ÷')
+      expect(calculator.print()).toEqual('3 ÷')
     })
 
     it('should clear the previous result', () => {
@@ -152,7 +152,7 @@ describe('@/modules/Calculator', () => {
         .calculate()
         .erase()
 
-      expect(calculator.print()).toBe('0')
+      expect(calculator.print()).toEqual('0')
     })
   })
 
@@ -170,7 +170,7 @@ describe('@/modules/Calculator', () => {
         .addNumber(givenThird)
         .clear()
 
-      expect(calculator.print()).toBe('0')
+      expect(calculator.print()).toEqual('0')
     })
 
     it.each`
@@ -183,7 +183,7 @@ describe('@/modules/Calculator', () => {
       calculator.setOperation(given)
         .clear()
 
-      expect(calculator.print()).toBe('0')
+      expect(calculator.print()).toEqual('0')
     })
 
     it.each`
@@ -198,7 +198,7 @@ describe('@/modules/Calculator', () => {
         .addNumber(givenNumber)
         .clear()
 
-      expect(calculator.print()).toBe('0')
+      expect(calculator.print()).toEqual('0')
     })
   })
 
@@ -212,7 +212,7 @@ describe('@/modules/Calculator', () => {
     `('should print the operator after the number ("$expected") when "$given" operation given', ({ given, expected }) => {
       calculator.setOperation(given)
 
-      expect(calculator.print()).toBe(expected)
+      expect(calculator.print()).toEqual(expected)
     })
 
     it.each`
@@ -225,7 +225,7 @@ describe('@/modules/Calculator', () => {
       calculator.setOperation(givenFirst)
         .setOperation(givenSecond)
 
-      expect(calculator.print()).toBe(expected)
+      expect(calculator.print()).toEqual(expected)
     })
 
     it('should calculate first before set operation again when second number is set', () => {
@@ -234,7 +234,7 @@ describe('@/modules/Calculator', () => {
         .addNumber(2)
         .setOperation(Operation.addition)
 
-      expect(calculator.print()).toBe('3 +')
+      expect(calculator.print()).toEqual('3 +')
     })
 
     it('should add a second number when calculate before set operation when second number is set', () => {
@@ -244,7 +244,7 @@ describe('@/modules/Calculator', () => {
         .setOperation(Operation.addition)
         .addNumber(3)
 
-      expect(calculator.print()).toBe('3 + 3')
+      expect(calculator.print()).toEqual('3 + 3')
     })
   })
 
@@ -260,7 +260,7 @@ describe('@/modules/Calculator', () => {
       calculator.setOperation(givenOperator)
         .addNumber(givenNumber)
 
-      expect(calculator.print()).toBe(expected)
+      expect(calculator.print()).toEqual(expected)
     })
   })
 
@@ -278,7 +278,7 @@ describe('@/modules/Calculator', () => {
         .addNumber(givenSecond)
         .calculate()
 
-      expect(calculator.print()).toBe(expected)
+      expect(calculator.print()).toEqual(expected)
     })
   })
 
@@ -289,7 +289,7 @@ describe('@/modules/Calculator', () => {
       .calculate()
       .addNumber(1)
 
-    expect(calculator.print()).toBe('1')
+    expect(calculator.print()).toEqual('1')
   })
 
   it('should reset the number only once when add many numbers after calculate', () => {
@@ -300,7 +300,7 @@ describe('@/modules/Calculator', () => {
       .addNumber(1)
       .addNumber(2)
 
-    expect(calculator.print()).toBe('12')
+    expect(calculator.print()).toEqual('12')
   })
 
   it('should concatenate several operations', () => {
@@ -312,7 +312,7 @@ describe('@/modules/Calculator', () => {
       .addNumber(1)
       .calculate()
 
-    expect(calculator.print()).toBe('5')
+    expect(calculator.print()).toEqual('5')
   })
 
   it('should repeat the last operation each time calculate is called', () => {
@@ -322,21 +322,21 @@ describe('@/modules/Calculator', () => {
       .calculate()
       .calculate()
 
-    expect(calculator.print()).toBe('8')
+    expect(calculator.print()).toEqual('8')
   })
 
   describe('Decimals', () => {
     it('should print decimal separator', () => {
       calculator.addDecimal()
 
-      expect(calculator.print()).toBe('0.')
+      expect(calculator.print()).toEqual('0.')
     })
 
     it('should print decimals on other locales', () => {
       calculator = new Calculator('es')
       calculator.addDecimal()
 
-      expect(calculator.print()).toBe('0,')
+      expect(calculator.print()).toEqual('0,')
     })
 
     it.each`
@@ -350,7 +350,7 @@ describe('@/modules/Calculator', () => {
       calculator.addNumber(given)
         .addDecimal()
 
-      expect(calculator.print()).toBe(expected)
+      expect(calculator.print()).toEqual(expected)
     })
 
     it.each`
@@ -364,14 +364,14 @@ describe('@/modules/Calculator', () => {
       calculator.addDecimal()
         .addNumber(given)
 
-      expect(calculator.print()).toBe(expected)
+      expect(calculator.print()).toEqual(expected)
     })
 
-    it('should remove decimal when set operator without adding a number after he decimal separator', () => {
+    it('should remove decimal when set operator without adding a number after the decimal separator', () => {
       calculator.addDecimal()
         .setOperation(Operation.multiplication)
 
-      expect(calculator.print()).toBe('0 ×')
+      expect(calculator.print()).toEqual('0 ×')
     })
 
     it.each`
@@ -386,7 +386,7 @@ describe('@/modules/Calculator', () => {
         .addNumber(given)
         .addDecimal()
 
-      expect(calculator.print()).toBe(expected)
+      expect(calculator.print()).toEqual(expected)
     })
 
     it.each`
@@ -401,7 +401,48 @@ describe('@/modules/Calculator', () => {
         .addDecimal()
         .addNumber(given)
 
-      expect(calculator.print()).toBe(expected)
+      expect(calculator.print()).toEqual(expected)
+    })
+
+    it('should print locale complex decimal operation', () => {
+      calculator = new Calculator('es')
+      calculator.addNumber(3)
+        .addNumber(4)
+        .addDecimal()
+        .addNumber(5)
+        .addNumber(6)
+        .setOperation(Operation.multiplication)
+        .addNumber(1)
+        .addDecimal()
+        .addNumber(0)
+        .addNumber(9)
+
+      expect(calculator.print()).toEqual('34,56 × 1,09')
+    })
+
+    it('should remove decimal when set operator after remove a number after a decimal', () => {
+      calculator.addDecimal()
+        .addNumber(1)
+        .erase()
+        .setOperation(Operation.subtraction)
+
+      expect(calculator.print()).toEqual('0 −')
+    })
+
+    it('should let still adding decimals when erase all decimal numbers', () => {
+      calculator.addDecimal()
+        .addNumber(1)
+        .erase()
+        .addNumber(2)
+
+      expect(calculator.print()).toEqual('0.2')
+    })
+
+    it('should erase decimal separator', () => {
+      calculator.addDecimal()
+        .erase()
+
+      expect(calculator.print()).toEqual('0')
     })
   })
 })

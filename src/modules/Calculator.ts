@@ -11,8 +11,7 @@ export class Calculator {
   private clearOnNumber = false
   private previousOperation: Operation | undefined
   private previousSecondNumber = '0'
-  private isNextDecimal = false;
-  private readonly decimalSeparator: string
+  public readonly decimalSeparator: string
 
   constructor (locale: string | undefined = undefined) {
     this.decimalSeparator = this.localeDecimalSeparator(locale)
@@ -30,15 +29,11 @@ export class Calculator {
     ]
       .filter(v => v !== undefined)
       .join(' ')
-      .replace('.', this.decimalSeparator)
+      .replaceAll('.', this.decimalSeparator)
   }
 
   private printFirstNumber (): string {
-    let print = this.firstNumber
-
-    if (!this.operation && this.isNextDecimal) {
-      print += '.'
-    }
+    const print = this.firstNumber
 
     return print
   }
@@ -54,14 +49,6 @@ export class Calculator {
       print = this.secondNumber
     }
 
-    if (this.isNextDecimal && this.operation && this.secondNumber === '0') {
-      print = this.secondNumber
-    }
-
-    if (this.isNextDecimal && this.operation) {
-      print += '.'
-    }
-
     return print
   }
 
@@ -71,16 +58,10 @@ export class Calculator {
     }
 
     if (this.operation) {
-      this.secondNumber = (this.isNextDecimal || this.secondNumber !== '0' ? this.secondNumber : '') +
-        (this.isNextDecimal ? '.' : '') +
-        (`${number}`)
+      this.secondNumber = `${this.secondNumber !== '0' ? this.secondNumber : ''}${number}`
     } else {
-      this.firstNumber = (this.isNextDecimal || this.firstNumber !== '0' ? this.firstNumber : '') +
-        (this.isNextDecimal ? '.' : '') +
-        (`${number}`)
+      this.firstNumber = `${this.firstNumber !== '0' ? this.firstNumber : ''}${number}`
     }
-
-    this.isNextDecimal = false
 
     return this
   }
@@ -115,9 +96,12 @@ export class Calculator {
       this.calculate()
     }
 
+    if (this.firstNumber.slice(-1) === '.') {
+      this.firstNumber = this.firstNumber.substring(0, this.firstNumber.length - 1)
+    }
+
     this.clearOnNumber = false
     this.operation = operation
-    this.isNextDecimal = false
 
     return this
   }
@@ -154,7 +138,11 @@ export class Calculator {
   }
 
   public addDecimal (): Calculator {
-    this.isNextDecimal = true
+    if (this.operation) {
+      this.secondNumber += '.'
+    } else {
+      this.firstNumber += '.'
+    }
 
     return this
   }

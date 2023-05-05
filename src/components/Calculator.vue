@@ -30,6 +30,16 @@
     </Button>
 
     <Button
+      key="decimal"
+      @mousedown.left="calculator.addDecimal()"
+      variant="operation"
+      :class="`calculator__button-decimal`"
+      data-test="decimal"
+    >
+      {{ calculator.decimalSeparator }}
+    </Button>
+
+    <Button
       key="clear"
       @mousedown.left="calculator.clear()"
       variant="clear"
@@ -98,6 +108,9 @@ export default defineComponent({
       if (key === '/') this.calculator.setOperation(Operation.division)
       if (key === '-') this.calculator.setOperation(Operation.subtraction)
 
+      if (key === ',') this.calculator.addDecimal()
+      if (key === '.') this.calculator.addDecimal()
+
       if (key === '=') this.calculator.calculate()
       if (key === 'Enter') this.calculator.calculate()
     }
@@ -120,7 +133,7 @@ export default defineComponent({
       "number-7 number-8 number-9 division       clear"
       "number-4 number-5 number-6 multiplication erase"
       "number-1 number-2 number-3 subtraction    calculate"
-      ".        number-0 .        addition       calculate";
+      ".        number-0 decimal  addition       calculate";
   }
 
   &__display {
@@ -148,6 +161,10 @@ export default defineComponent({
 
   &__button-addition {
     grid-area: addition;
+  }
+
+  &__button-decimal {
+    grid-area: decimal;
   }
 
   &__button-clear {

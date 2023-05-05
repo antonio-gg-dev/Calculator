@@ -326,10 +326,17 @@ describe('@/modules/Calculator', () => {
   })
 
   describe('Decimals', () => {
-    it('should write decimal separator', () => {
+    it('should print decimal separator', () => {
       calculator.addDecimal()
 
       expect(calculator.print()).toBe('0.')
+    })
+
+    it('should print decimals on other locales', () => {
+      calculator = new Calculator('es')
+      calculator.addDecimal()
+
+      expect(calculator.print()).toBe('0,')
     })
 
     it.each`
@@ -358,6 +365,13 @@ describe('@/modules/Calculator', () => {
         .addNumber(given)
 
       expect(calculator.print()).toBe(expected)
+    })
+
+    it('should remove decimal when set operator without adding a number after he decimal separator', () => {
+      calculator.addDecimal()
+        .setOperation(Operation.multiplication)
+
+      expect(calculator.print()).toBe('0 ×')
     })
   })
 })

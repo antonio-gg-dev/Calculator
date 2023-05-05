@@ -15,17 +15,22 @@ export class Calculator {
   private readonly decimalSeparator: string
 
   constructor (locale: string | undefined = undefined) {
-    this.decimalSeparator = (1.1).toLocaleString(locale).substring(1, 2)
+    this.decimalSeparator = this.localeDecimalSeparator(locale)
+  }
+
+  private localeDecimalSeparator (locale: string | undefined = undefined): string {
+    return (1.1).toLocaleString(locale).substring(1, 2)
   }
 
   public print (): string {
     return [
-      this.firstNumber + (this.isNextDecimal ? this.decimalSeparator : ''),
+      this.firstNumber + (this.isNextDecimal ? '.' : ''),
       this.operation,
       this.secondNumber !== '0' ? this.secondNumber : undefined
     ]
       .filter(v => v !== undefined)
       .join(' ')
+      .replace('.', this.decimalSeparator)
   }
 
   public addNumber (number: 0|1|2|3|4|5|6|7|8|9): Calculator {
@@ -37,7 +42,7 @@ export class Calculator {
       this.secondNumber = `${this.secondNumber !== '0' ? this.secondNumber : ''}${number}`
     } else {
       this.firstNumber = (this.isNextDecimal || this.firstNumber !== '0' ? this.firstNumber : '') +
-        (this.isNextDecimal ? this.decimalSeparator : '') +
+        (this.isNextDecimal ? '.' : '') +
         (number)
     }
 
@@ -78,6 +83,7 @@ export class Calculator {
 
     this.clearOnNumber = false
     this.operation = operation
+    this.isNextDecimal = false
 
     return this
   }

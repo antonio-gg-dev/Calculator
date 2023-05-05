@@ -537,4 +537,26 @@ describe('@/modules/Calculator', () => {
       expect(calculator.print()).toEqual('3.3')
     })
   })
+
+  describe('Toggling symbol', () => {
+    it('should toggle the symbol once', () => {
+      calculator.toggleSymbol()
+
+      expect(calculator.print()).toEqual('−0')
+    })
+
+    it('should toggle the symbol twice', () => {
+      calculator.toggleSymbol()
+        .toggleSymbol()
+
+      expect(calculator.print()).toEqual('0')
+    })
+
+    it('should toggle then add number properly', () => {
+      calculator.toggleSymbol()
+        .addNumber(7)
+
+      expect(calculator.print()).toEqual('−7')
+    })
+  })
 })

@@ -13,7 +13,9 @@ describe('@/components/Calculator.vue', () => {
       calculate: jest.fn(),
       setOperation: jest.fn(),
       clear: jest.fn(),
-      erase: jest.fn()
+      erase: jest.fn(),
+      addDecimalSeparator: jest.fn(),
+      toggleSymbol: jest.fn()
     } as unknown as CalculatorService
 
     calculatorComponent = shallowMount(CalculatorComponent, {
@@ -57,6 +59,20 @@ describe('@/components/Calculator.vue', () => {
       .trigger('mousedown')
 
     expect(calculatorService.setOperation).toHaveBeenCalledWith(symbol)
+  })
+
+  it('should call addDecimalSeparator when decimal button clicked ', () => {
+    calculatorComponent.find('[data-test="decimal"]')
+      .trigger('mousedown')
+
+    expect(calculatorService.addDecimalSeparator).toHaveBeenCalled()
+  })
+
+  it('should call toggleSymbol when symbol button clicked ', () => {
+    calculatorComponent.find('[data-test="symbol"]')
+      .trigger('mousedown')
+
+    expect(calculatorService.toggleSymbol).toHaveBeenCalled()
   })
 
   it('should call erase when erase button clicked ', () => {

@@ -8,6 +8,7 @@ export enum Operation {
 }
 export class Calculator {
   private firstNumber = '0'
+  private isFirstNumberNegative = false
   private operation: Operation | undefined
   private secondNumber = '0'
   private clearOnNumber = false
@@ -25,6 +26,7 @@ export class Calculator {
 
   public print (): string {
     return [
+      (this.isFirstNumberNegative ? '-' : undefined),
       this.firstNumber,
       this.operation,
       (this.secondNumber !== '0' ? this.secondNumber : undefined)
@@ -32,6 +34,7 @@ export class Calculator {
       .filter(v => v !== undefined)
       .join(' ')
       .replaceAll('.', this.decimalSeparator)
+      .replaceAll('- ', '−')
   }
 
   public addNumber (number: 0|1|2|3|4|5|6|7|8|9): Calculator {
@@ -127,6 +130,12 @@ export class Calculator {
     } else if (!this.operation && !this.firstNumber.includes('.')) {
       this.firstNumber += '.'
     }
+
+    return this
+  }
+
+  public toggleSymbol (): Calculator {
+    this.isFirstNumberNegative = !this.isFirstNumberNegative
 
     return this
   }

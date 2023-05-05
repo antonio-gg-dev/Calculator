@@ -23,31 +23,13 @@ export class Calculator {
 
   public print (): string {
     return [
-      this.printFirstNumber(),
-      this.printOperation(),
-      this.printSecondNumber()
+      this.firstNumber,
+      this.operation,
+      (this.secondNumber !== '0' ? this.secondNumber : undefined)
     ]
       .filter(v => v !== undefined)
       .join(' ')
       .replaceAll('.', this.decimalSeparator)
-  }
-
-  private printFirstNumber (): string {
-    return this.firstNumber
-  }
-
-  private printOperation (): string | undefined {
-    return this.operation
-  }
-
-  private printSecondNumber (): string | undefined {
-    let print
-
-    if (this.secondNumber !== '0') {
-      print = this.secondNumber
-    }
-
-    return print
   }
 
   public addNumber (number: 0|1|2|3|4|5|6|7|8|9): Calculator {

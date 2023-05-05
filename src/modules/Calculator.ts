@@ -24,13 +24,45 @@ export class Calculator {
 
   public print (): string {
     return [
-      this.firstNumber + (this.isNextDecimal ? '.' : ''),
-      this.operation,
-      this.secondNumber !== '0' ? this.secondNumber : undefined
+      this.printFirstNumber(),
+      this.printOperation(),
+      this.printSecondNumber()
     ]
       .filter(v => v !== undefined)
       .join(' ')
       .replace('.', this.decimalSeparator)
+  }
+
+  private printFirstNumber (): string {
+    let print = this.firstNumber
+
+    if (!this.operation && this.isNextDecimal) {
+      print += '.'
+    }
+
+    return print
+  }
+
+  private printOperation (): string | undefined {
+    return this.operation
+  }
+
+  private printSecondNumber (): string | undefined {
+    let print
+
+    if (this.secondNumber !== '0') {
+      print = this.secondNumber
+    }
+
+    if (this.isNextDecimal && this.operation && this.secondNumber === '0') {
+      print = this.secondNumber
+    }
+
+    if (this.isNextDecimal && this.operation) {
+      print += '.'
+    }
+
+    return print
   }
 
   public addNumber (number: 0|1|2|3|4|5|6|7|8|9): Calculator {
@@ -39,11 +71,13 @@ export class Calculator {
     }
 
     if (this.operation) {
-      this.secondNumber = `${this.secondNumber !== '0' ? this.secondNumber : ''}${number}`
+      this.secondNumber = (this.isNextDecimal || this.secondNumber !== '0' ? this.secondNumber : '') +
+        (this.isNextDecimal ? '.' : '') +
+        (`${number}`)
     } else {
       this.firstNumber = (this.isNextDecimal || this.firstNumber !== '0' ? this.firstNumber : '') +
         (this.isNextDecimal ? '.' : '') +
-        (number)
+        (`${number}`)
     }
 
     this.isNextDecimal = false

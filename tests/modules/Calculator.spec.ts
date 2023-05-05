@@ -373,5 +373,35 @@ describe('@/modules/Calculator', () => {
 
       expect(calculator.print()).toBe('0 ×')
     })
+
+    it.each`
+      given | expected
+      ${0}  | ${'0 + 0.'}
+      ${2}  | ${'0 + 2.'}
+      ${4}  | ${'0 + 4.'}
+      ${5}  | ${'0 + 5.'}
+      ${9}  | ${'0 + 9.'}
+    `('should print "$expected" when add number $given then decimal on second number', ({ given, expected }) => {
+      calculator.setOperation(Operation.addition)
+        .addNumber(given)
+        .addDecimal()
+
+      expect(calculator.print()).toBe(expected)
+    })
+
+    it.each`
+      given | expected
+      ${0}  | ${'0 + 0.0'}
+      ${4}  | ${'0 + 0.4'}
+      ${5}  | ${'0 + 0.5'}
+      ${6}  | ${'0 + 0.6'}
+      ${9}  | ${'0 + 0.9'}
+    `('should print "$expected" when add decimal then number on second number', ({ given, expected }) => {
+      calculator.setOperation(Operation.addition)
+        .addDecimal()
+        .addNumber(given)
+
+      expect(calculator.print()).toBe(expected)
+    })
   })
 })

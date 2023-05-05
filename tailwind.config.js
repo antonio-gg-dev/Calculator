@@ -34,6 +34,11 @@ module.exports = {
     boxShadow: {
       out: '0.25rem 0.25rem 0.75rem #0000002f, -0.25rem -0.25rem 0.75rem #ffffff, inset 0 0 0 transparent, inset 0 0 0 transparent',
       in: '0 0 0 transparent, 0 0 0 transparent, inset 0.25rem 0.25rem 0.75rem #0000002f, inset -0.25rem -0.25rem 0.75rem #ffffff'
+    },
+    extend: {
+      maxWidth: {
+        calculator: '32rem'
+      }
     }
   }
 }

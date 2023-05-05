@@ -25,7 +25,10 @@ const Template: StoryFn = (args) => ({
       erase: () => calculator,
       clear: () => calculator,
       setOperation: () => calculator,
-      calculate: () => calculator
+      calculate: () => calculator,
+      addDecimalSeparator: () => calculator,
+      toggleSymbol: () => calculator,
+      decimalSeparator: '.'
     } as unknown as CalculatorService
 
     return {

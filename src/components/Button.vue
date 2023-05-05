@@ -23,7 +23,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .button {
   &__button {
-    @apply block aspect-square w-20 rounded-full text-4xl transition-all shadow-out;
+    @apply block aspect-square rounded-full text-4xl transition-all shadow-out;
 
     &--number {
       @apply bg-base text-base-alt;

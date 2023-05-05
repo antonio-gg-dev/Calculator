@@ -21,7 +21,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .app {
   &__container {
-    @apply grid min-h-screen place-items-center p-6;
+    @apply grid min-h-screen place-items-center;
   }
 }
 </style>

@@ -31,19 +31,29 @@
 
     <Button
       key="decimal"
-      @mousedown.left="calculator.addDecimal()"
+      @mousedown.left="calculator.addDecimalSeparator()"
       variant="operation"
-      :class="`calculator__button-decimal`"
+      class="calculator__button-decimal"
       data-test="decimal"
     >
       {{ calculator.decimalSeparator }}
     </Button>
 
     <Button
+      key="decimal"
+      @mousedown.left="calculator.toggleSymbol()"
+      variant="operation"
+      class="calculator__button-symbol"
+      data-test="symbol"
+    >
+      ±
+    </Button>
+
+    <Button
       key="clear"
       @mousedown.left="calculator.clear()"
       variant="clear"
-      :class="`calculator__button-clear`"
+      class="calculator__button-clear"
       data-test="clear"
     >
       C
@@ -53,7 +63,7 @@
       key="erase"
       @mousedown.left="calculator.erase()"
       variant="operation"
-      :class="`calculator__button-erase`"
+      class="calculator__button-erase"
       data-test="erase"
     >
       ⌫
@@ -63,7 +73,7 @@
       key="calculate"
       @mousedown.left="calculator.calculate()"
       variant="operation"
-      :class="`calculator__button-calculate`"
+      class="calculator__button-calculate"
       data-test="calculate"
     >
       =
@@ -108,8 +118,8 @@ export default defineComponent({
       if (key === '/') this.calculator.setOperation(Operation.division)
       if (key === '-') this.calculator.setOperation(Operation.subtraction)
 
-      if (key === ',') this.calculator.addDecimal()
-      if (key === '.') this.calculator.addDecimal()
+      if (key === ',') this.calculator.addDecimalSeparator()
+      if (key === '.') this.calculator.addDecimalSeparator()
 
       if (key === '=') this.calculator.calculate()
       if (key === 'Enter') this.calculator.calculate()
@@ -127,13 +137,13 @@ export default defineComponent({
 <style scoped lang="scss">
 .calculator {
   &__container {
-    @apply grid w-fit gap-4;
+    @apply grid w-screen max-w-calculator grid-cols-5 gap-4 p-6;
     grid-template-areas:
       "display  display  display  display        display"
       "number-7 number-8 number-9 division       clear"
       "number-4 number-5 number-6 multiplication erase"
       "number-1 number-2 number-3 subtraction    calculate"
-      ".        number-0 decimal  addition       calculate";
+      "symbol   number-0 decimal  addition       calculate";
   }
 
   &__display {
@@ -161,6 +171,10 @@ export default defineComponent({
 
   &__button-addition {
     grid-area: addition;
+  }
+
+  &__button-symbol {
+    grid-area: symbol;
   }
 
   &__button-decimal {

@@ -31,7 +31,10 @@ const Template: StoryFn = (args) => ({
     args
   }),
   template: `
-    <Button v-bind="args">
+    <Button
+      style="width: 5rem"
+      v-bind="args"
+    >
       {{ args.label }}
     </Button>
   `

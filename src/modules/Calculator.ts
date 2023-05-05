@@ -1,3 +1,5 @@
+import Decimal from 'decimal.js'
+
 export enum Operation {
   addition = '+',
   subtraction = '−',
@@ -30,6 +32,7 @@ export class Calculator {
       .filter(v => v !== undefined)
       .join(' ')
       .replaceAll('.', this.decimalSeparator)
+      .replaceAll('-', '−')
   }
 
   public addNumber (number: 0|1|2|3|4|5|6|7|8|9): Calculator {
@@ -38,9 +41,29 @@ export class Calculator {
     }
 
     if (this.operation) {
-      this.secondNumber = `${this.secondNumber !== '0' ? this.secondNumber : ''}${number}`
+      let secondNumber = this.secondNumber
+
+      if (secondNumber === '0') {
+        secondNumber = ''
+      }
+
+      if (secondNumber === '-0') {
+        secondNumber = '-'
+      }
+
+      this.secondNumber = `${secondNumber}${number}`
     } else {
-      this.firstNumber = `${this.firstNumber !== '0' ? this.firstNumber : ''}${number}`
+      let firstNumber = this.firstNumber
+
+      if (firstNumber === '0') {
+        firstNumber = ''
+      }
+
+      if (firstNumber === '-0') {
+        firstNumber = '-'
+      }
+
+      this.firstNumber = `${firstNumber}${number}`
     }
 
     return this
@@ -52,11 +75,27 @@ export class Calculator {
     }
 
     if (this.secondNumber !== '0') {
+      if (this.secondNumber === '-0') {
+        this.secondNumber = '0'
+      }
+
       this.secondNumber = this.secondNumber.substring(0, this.secondNumber.length - 1) || '0'
+
+      if (this.secondNumber === '-') {
+        this.secondNumber = '-0'
+      }
     } else if (this.operation) {
       this.operation = undefined
     } else {
+      if (this.firstNumber === '-0') {
+        this.firstNumber = '0'
+      }
+
       this.firstNumber = this.firstNumber.substring(0, this.firstNumber.length - 1) || '0'
+
+      if (this.firstNumber === '-') {
+        this.firstNumber = '-0'
+      }
     }
 
     return this
@@ -96,16 +135,16 @@ export class Calculator {
 
     switch (this.operation) {
       case Operation.addition:
-        this.firstNumber = `${Number(this.firstNumber) + Number(this.secondNumber)}`
+        this.firstNumber = new Decimal(this.firstNumber).add(this.secondNumber).toString()
         break
       case Operation.subtraction:
-        this.firstNumber = `${Number(this.firstNumber) - Number(this.secondNumber)}`
+        this.firstNumber = new Decimal(this.firstNumber).sub(this.secondNumber).toString()
         break
       case Operation.division:
-        this.firstNumber = `${Number(this.firstNumber) / Number(this.secondNumber)}`
+        this.firstNumber = new Decimal(this.firstNumber).div(this.secondNumber).toString()
         break
       case Operation.multiplication:
-        this.firstNumber = `${Number(this.firstNumber) * Number(this.secondNumber)}`
+        this.firstNumber = new Decimal(this.firstNumber).mul(this.secondNumber).toString()
         break
     }
 
@@ -119,11 +158,29 @@ export class Calculator {
     return this
   }
 
-  public addDecimal (): Calculator {
+  public addDecimalSeparator (): Calculator {
     if (this.operation && !this.secondNumber.includes('.')) {
       this.secondNumber += '.'
     } else if (!this.operation && !this.firstNumber.includes('.')) {
       this.firstNumber += '.'
+    }
+
+    return this
+  }
+
+  public toggleSymbol (): Calculator {
+    if (this.operation) {
+      if (this.secondNumber.charAt(0) === '-') {
+        this.secondNumber = this.secondNumber.slice(1)
+      } else {
+        this.secondNumber = `-${this.secondNumber}`
+      }
+    } else {
+      if (this.firstNumber.charAt(0) === '-') {
+        this.firstNumber = this.firstNumber.slice(1)
+      } else {
+        this.firstNumber = `-${this.firstNumber}`
+      }
     }
 
     return this

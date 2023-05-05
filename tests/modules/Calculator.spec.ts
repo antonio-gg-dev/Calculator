@@ -539,20 +539,20 @@ describe('@/modules/Calculator', () => {
   })
 
   describe('Toggling symbol', () => {
-    it('should toggle the symbol once', () => {
+    it('should toggle the symbol of first number once', () => {
       calculator.toggleSymbol()
 
       expect(calculator.print()).toEqual('−0')
     })
 
-    it('should toggle the symbol twice', () => {
+    it('should toggle the symbol of first number twice', () => {
       calculator.toggleSymbol()
         .toggleSymbol()
 
       expect(calculator.print()).toEqual('0')
     })
 
-    it('should toggle then add number properly', () => {
+    it('should toggle the first number then add number properly', () => {
       calculator.toggleSymbol()
         .addNumber(7)
 

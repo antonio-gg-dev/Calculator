@@ -200,6 +200,16 @@ describe('@/modules/Calculator', () => {
 
       expect(calculator.print()).toEqual('0')
     })
+
+    it('should clear the previous operation', () => {
+      calculator.setOperation(Operation.addition)
+        .addNumber(1)
+        .calculate()
+        .clear()
+        .calculate()
+
+      expect(calculator.print()).toEqual('0')
+    })
   })
 
   describe('Operators', () => {

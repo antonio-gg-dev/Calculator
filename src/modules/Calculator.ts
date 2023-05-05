@@ -67,6 +67,8 @@ export class Calculator {
     this.operation = undefined
     this.secondNumber = '0'
     this.clearOnNumber = false
+    this.previousOperation = undefined
+    this.previousSecondNumber = '0'
 
     return this
   }

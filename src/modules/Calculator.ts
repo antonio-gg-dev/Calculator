@@ -121,7 +121,7 @@ export class Calculator {
     return this
   }
 
-  public addDecimal (): Calculator {
+  public addDecimalSeparator (): Calculator {
     if (this.operation && !this.secondNumber.includes('.')) {
       this.secondNumber += '.'
     } else if (!this.operation && !this.firstNumber.includes('.')) {

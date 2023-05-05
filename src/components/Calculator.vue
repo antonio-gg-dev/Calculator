@@ -31,7 +31,7 @@
 
     <Button
       key="decimal"
-      @mousedown.left="calculator.addDecimal()"
+      @mousedown.left="calculator.addDecimalSeparator()"
       variant="operation"
       :class="`calculator__button-decimal`"
       data-test="decimal"
@@ -108,8 +108,8 @@ export default defineComponent({
       if (key === '/') this.calculator.setOperation(Operation.division)
       if (key === '-') this.calculator.setOperation(Operation.subtraction)
 
-      if (key === ',') this.calculator.addDecimal()
-      if (key === '.') this.calculator.addDecimal()
+      if (key === ',') this.calculator.addDecimalSeparator()
+      if (key === '.') this.calculator.addDecimalSeparator()
 
       if (key === '=') this.calculator.calculate()
       if (key === 'Enter') this.calculator.calculate()

@@ -337,14 +337,14 @@ describe('@/modules/Calculator', () => {
 
   describe('Decimals', () => {
     it('should print decimal separator', () => {
-      calculator.addDecimal()
+      calculator.addDecimalSeparator()
 
       expect(calculator.print()).toEqual('0.')
     })
 
     it('should print decimals on other locales', () => {
       calculator = new Calculator('es')
-      calculator.addDecimal()
+      calculator.addDecimalSeparator()
 
       expect(calculator.print()).toEqual('0,')
     })
@@ -358,7 +358,7 @@ describe('@/modules/Calculator', () => {
       ${9}  | ${'9.'}
     `('should print "$expected" when add number $given then decimal', ({ given, expected }) => {
       calculator.addNumber(given)
-        .addDecimal()
+        .addDecimalSeparator()
 
       expect(calculator.print()).toEqual(expected)
     })
@@ -371,14 +371,14 @@ describe('@/modules/Calculator', () => {
       ${6}  | ${'0.6'}
       ${9}  | ${'0.9'}
     `('should print "$expected" when add decimal then number', ({ given, expected }) => {
-      calculator.addDecimal()
+      calculator.addDecimalSeparator()
         .addNumber(given)
 
       expect(calculator.print()).toEqual(expected)
     })
 
     it('should remove decimal when set operator without adding a number after the decimal separator', () => {
-      calculator.addDecimal()
+      calculator.addDecimalSeparator()
         .setOperation(Operation.multiplication)
 
       expect(calculator.print()).toEqual('0 ×')
@@ -394,7 +394,7 @@ describe('@/modules/Calculator', () => {
     `('should print "$expected" when add number $given then decimal on second number', ({ given, expected }) => {
       calculator.setOperation(Operation.addition)
         .addNumber(given)
-        .addDecimal()
+        .addDecimalSeparator()
 
       expect(calculator.print()).toEqual(expected)
     })
@@ -408,7 +408,7 @@ describe('@/modules/Calculator', () => {
       ${9}  | ${'0 + 0.9'}
     `('should print "$expected" when add decimal then number on second number', ({ given, expected }) => {
       calculator.setOperation(Operation.addition)
-        .addDecimal()
+        .addDecimalSeparator()
         .addNumber(given)
 
       expect(calculator.print()).toEqual(expected)
@@ -418,12 +418,12 @@ describe('@/modules/Calculator', () => {
       calculator = new Calculator('es')
       calculator.addNumber(3)
         .addNumber(4)
-        .addDecimal()
+        .addDecimalSeparator()
         .addNumber(5)
         .addNumber(6)
         .setOperation(Operation.multiplication)
         .addNumber(1)
-        .addDecimal()
+        .addDecimalSeparator()
         .addNumber(0)
         .addNumber(9)
 
@@ -431,7 +431,7 @@ describe('@/modules/Calculator', () => {
     })
 
     it('should remove decimal when set operator after remove a number after a decimal', () => {
-      calculator.addDecimal()
+      calculator.addDecimalSeparator()
         .addNumber(1)
         .erase()
         .setOperation(Operation.subtraction)
@@ -440,7 +440,7 @@ describe('@/modules/Calculator', () => {
     })
 
     it('should let still adding decimals when erase all decimal numbers', () => {
-      calculator.addDecimal()
+      calculator.addDecimalSeparator()
         .addNumber(1)
         .erase()
         .addNumber(2)
@@ -449,51 +449,51 @@ describe('@/modules/Calculator', () => {
     })
 
     it('should erase decimal separator', () => {
-      calculator.addDecimal()
+      calculator.addDecimalSeparator()
         .erase()
 
       expect(calculator.print()).toEqual('0')
     })
 
     it('should not add more than one consecutive decimal separator on first number', () => {
-      calculator.addDecimal()
-        .addDecimal()
+      calculator.addDecimalSeparator()
+        .addDecimalSeparator()
 
       expect(calculator.print()).toEqual('0.')
     })
 
     it('should not add more than one consecutive decimal separator on second number', () => {
       calculator.setOperation(Operation.multiplication)
-        .addDecimal()
-        .addDecimal()
+        .addDecimalSeparator()
+        .addDecimalSeparator()
 
       expect(calculator.print()).toEqual('0 × 0.')
     })
 
     it('should not add more than one decimal separator on first number', () => {
-      calculator.addDecimal()
+      calculator.addDecimalSeparator()
         .addNumber(0)
-        .addDecimal()
+        .addDecimalSeparator()
 
       expect(calculator.print()).toEqual('0.0')
     })
 
     it('should not add more than one decimal separator on second number', () => {
       calculator.setOperation(Operation.multiplication)
-        .addDecimal()
+        .addDecimalSeparator()
         .addNumber(0)
-        .addDecimal()
+        .addDecimalSeparator()
 
       expect(calculator.print()).toEqual('0 × 0.0')
     })
 
     it('should be precise on decimal additions', () => {
       calculator.addNumber(1)
-        .addDecimal()
+        .addDecimalSeparator()
         .addNumber(1)
         .setOperation(Operation.addition)
         .addNumber(2)
-        .addDecimal()
+        .addDecimalSeparator()
         .addNumber(2)
         .calculate()
 
@@ -502,11 +502,11 @@ describe('@/modules/Calculator', () => {
 
     it('should be precise on decimal division', () => {
       calculator.addNumber(3)
-        .addDecimal()
+        .addDecimalSeparator()
         .addNumber(3)
         .setOperation(Operation.division)
         .addNumber(1)
-        .addDecimal()
+        .addDecimalSeparator()
         .addNumber(1)
         .calculate()
 
@@ -515,11 +515,11 @@ describe('@/modules/Calculator', () => {
 
     it('should be precise on decimal subtraction', () => {
       calculator.addNumber(3)
-        .addDecimal()
+        .addDecimalSeparator()
         .addNumber(3)
         .setOperation(Operation.subtraction)
         .addNumber(1)
-        .addDecimal()
+        .addDecimalSeparator()
         .addNumber(1)
         .calculate()
 
@@ -528,7 +528,7 @@ describe('@/modules/Calculator', () => {
 
     it('should be precise on decimal multiplication', () => {
       calculator.addNumber(1)
-        .addDecimal()
+        .addDecimalSeparator()
         .addNumber(1)
         .setOperation(Operation.multiplication)
         .addNumber(3)

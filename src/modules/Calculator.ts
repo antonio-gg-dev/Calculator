@@ -33,9 +33,7 @@ export class Calculator {
   }
 
   private printFirstNumber (): string {
-    const print = this.firstNumber
-
-    return print
+    return this.firstNumber
   }
 
   private printOperation (): string | undefined {
@@ -138,9 +136,9 @@ export class Calculator {
   }
 
   public addDecimal (): Calculator {
-    if (this.operation) {
+    if (this.operation && this.secondNumber.slice(-1) !== '.') {
       this.secondNumber += '.'
-    } else {
+    } else if (!this.operation && this.firstNumber.slice(-1) !== '.') {
       this.firstNumber += '.'
     }
 

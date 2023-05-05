@@ -581,5 +581,20 @@ describe('@/modules/Calculator', () => {
 
       expect(calculator.print()).toEqual('0 − −7')
     })
+
+    it('should print -0 when erase last number of first number', () => {
+      calculator.addNumber(5)
+        .toggleSymbol()
+        .erase()
+
+      expect(calculator.print()).toEqual('−0')
+    })
+
+    it('should print 0 when erase -0', () => {
+      calculator.toggleSymbol()
+        .erase()
+
+      expect(calculator.print()).toEqual('0')
+    })
   })
 })

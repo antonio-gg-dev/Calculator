@@ -79,7 +79,15 @@ export class Calculator {
     } else if (this.operation) {
       this.operation = undefined
     } else {
+      if (this.firstNumber === '-0') {
+        this.firstNumber = '0'
+      }
+
       this.firstNumber = this.firstNumber.substring(0, this.firstNumber.length - 1) || '0'
+
+      if (this.firstNumber === '-') {
+        this.firstNumber = '-0'
+      }
     }
 
     return this

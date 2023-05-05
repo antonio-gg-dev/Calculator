@@ -486,5 +486,55 @@ describe('@/modules/Calculator', () => {
 
       expect(calculator.print()).toEqual('0 × 0.0')
     })
+
+    it('should be precise on decimal additions', () => {
+      calculator.addNumber(1)
+        .addDecimal()
+        .addNumber(1)
+        .setOperation(Operation.addition)
+        .addNumber(2)
+        .addDecimal()
+        .addNumber(2)
+        .calculate()
+
+      expect(calculator.print()).toEqual('3.3')
+    })
+
+    it('should be precise on decimal division', () => {
+      calculator.addNumber(3)
+        .addDecimal()
+        .addNumber(3)
+        .setOperation(Operation.division)
+        .addNumber(1)
+        .addDecimal()
+        .addNumber(1)
+        .calculate()
+
+      expect(calculator.print()).toEqual('3')
+    })
+
+    it('should be precise on decimal subtraction', () => {
+      calculator.addNumber(3)
+        .addDecimal()
+        .addNumber(3)
+        .setOperation(Operation.subtraction)
+        .addNumber(1)
+        .addDecimal()
+        .addNumber(1)
+        .calculate()
+
+      expect(calculator.print()).toEqual('2.2')
+    })
+
+    it('should be precise on decimal multiplication', () => {
+      calculator.addNumber(1)
+        .addDecimal()
+        .addNumber(1)
+        .setOperation(Operation.multiplication)
+        .addNumber(3)
+        .calculate()
+
+      expect(calculator.print()).toEqual('3.3')
+    })
   })
 })

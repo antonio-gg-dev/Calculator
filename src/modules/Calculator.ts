@@ -1,3 +1,5 @@
+import Decimal from 'decimal.js'
+
 export enum Operation {
   addition = '+',
   subtraction = '−',
@@ -96,16 +98,16 @@ export class Calculator {
 
     switch (this.operation) {
       case Operation.addition:
-        this.firstNumber = `${Number(this.firstNumber) + Number(this.secondNumber)}`
+        this.firstNumber = new Decimal(this.firstNumber).add(this.secondNumber).toString()
         break
       case Operation.subtraction:
-        this.firstNumber = `${Number(this.firstNumber) - Number(this.secondNumber)}`
+        this.firstNumber = new Decimal(this.firstNumber).sub(this.secondNumber).toString()
         break
       case Operation.division:
-        this.firstNumber = `${Number(this.firstNumber) / Number(this.secondNumber)}`
+        this.firstNumber = new Decimal(this.firstNumber).div(this.secondNumber).toString()
         break
       case Operation.multiplication:
-        this.firstNumber = `${Number(this.firstNumber) * Number(this.secondNumber)}`
+        this.firstNumber = new Decimal(this.firstNumber).mul(this.secondNumber).toString()
         break
     }
 

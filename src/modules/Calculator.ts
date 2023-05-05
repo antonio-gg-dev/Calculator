@@ -118,9 +118,9 @@ export class Calculator {
   }
 
   public addDecimal (): Calculator {
-    if (this.operation && this.secondNumber.slice(-1) !== '.') {
+    if (this.operation && !this.secondNumber.includes('.')) {
       this.secondNumber += '.'
-    } else if (!this.operation && this.firstNumber.slice(-1) !== '.') {
+    } else if (!this.operation && !this.firstNumber.includes('.')) {
       this.firstNumber += '.'
     }
 

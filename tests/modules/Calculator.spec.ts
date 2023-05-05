@@ -445,19 +445,36 @@ describe('@/modules/Calculator', () => {
       expect(calculator.print()).toEqual('0')
     })
 
-    it('should not add more than one decimal separator on first number', () => {
+    it('should not add more than one consecutive decimal separator on first number', () => {
       calculator.addDecimal()
         .addDecimal()
 
       expect(calculator.print()).toEqual('0.')
     })
 
-    it('should not add more than one decimal separator on first second', () => {
+    it('should not add more than one consecutive decimal separator on second number', () => {
       calculator.setOperation(Operation.multiplication)
         .addDecimal()
         .addDecimal()
 
       expect(calculator.print()).toEqual('0 × 0.')
+    })
+
+    it('should not add more than one decimal separator on first number', () => {
+      calculator.addDecimal()
+        .addNumber(0)
+        .addDecimal()
+
+      expect(calculator.print()).toEqual('0.0')
+    })
+
+    it('should not add more than one decimal separator on second number', () => {
+      calculator.setOperation(Operation.multiplication)
+        .addDecimal()
+        .addNumber(0)
+        .addDecimal()
+
+      expect(calculator.print()).toEqual('0 × 0.0')
     })
   })
 })

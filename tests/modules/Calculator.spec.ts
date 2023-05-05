@@ -582,7 +582,7 @@ describe('@/modules/Calculator', () => {
       expect(calculator.print()).toEqual('0 − −7')
     })
 
-    it('should print -0 when erase last number of first number', () => {
+    it('should print -0 when erase last number on first number', () => {
       calculator.addNumber(5)
         .toggleSymbol()
         .erase()
@@ -590,11 +590,28 @@ describe('@/modules/Calculator', () => {
       expect(calculator.print()).toEqual('−0')
     })
 
-    it('should print 0 when erase -0', () => {
+    it('should print 0 when erase -0 on first number', () => {
       calculator.toggleSymbol()
         .erase()
 
       expect(calculator.print()).toEqual('0')
+    })
+
+    it('should print -0 when erase last number on second number', () => {
+      calculator.setOperation(Operation.multiplication)
+        .addNumber(5)
+        .toggleSymbol()
+        .erase()
+
+      expect(calculator.print()).toEqual('0 × −0')
+    })
+
+    it('should not print when erase -0 on second number', () => {
+      calculator.setOperation(Operation.multiplication)
+        .toggleSymbol()
+        .erase()
+
+      expect(calculator.print()).toEqual('0 ×')
     })
   })
 })

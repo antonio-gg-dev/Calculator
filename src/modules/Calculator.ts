@@ -75,7 +75,15 @@ export class Calculator {
     }
 
     if (this.secondNumber !== '0') {
+      if (this.secondNumber === '-0') {
+        this.secondNumber = '0'
+      }
+
       this.secondNumber = this.secondNumber.substring(0, this.secondNumber.length - 1) || '0'
+
+      if (this.secondNumber === '-') {
+        this.secondNumber = '-0'
+      }
     } else if (this.operation) {
       this.operation = undefined
     } else {

@@ -137,7 +137,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .calculator {
   &__container {
-    @apply grid w-screen max-w-calculator grid-cols-5 gap-4 p-6;
+    @apply grid w-screen grid-cols-5 gap-4 p-6 max-w-calculator;
     grid-template-areas:
       "display  display  display  display        display"
       "number-7 number-8 number-9 division       clear"
@@ -147,7 +147,7 @@ export default defineComponent({
   }
 
   &__display {
-    @apply px-6 pb-5 text-right text-4xl leading-none;
+    @apply px-6 pb-5 text-right text-4xl leading-none bg-display text-display-alt;
     grid-area: display;
   }
 

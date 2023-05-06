@@ -1,20 +1,35 @@
-const { TsconfigPathsPlugin } = require("tsconfig-paths-webpack-plugin");
-import type { StorybookConfig } from "@storybook/vue3-webpack5";
+const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
+import type { StorybookConfig } from '@storybook/vue3-webpack5';
 
 const config: StorybookConfig = {
-  stories: ["../stories/**/*.mdx", "../stories/**/*.stories.@(js|jsx|ts|tsx)"],
-  addons: ["@storybook/addon-links", "@storybook/addon-essentials", "@storybook/addon-interactions", {
-    name: '@storybook/addon-styling',
-    options: {
-      postCss: true
-    }
-  }, "@storybook/addon-mdx-gfm"],
+  stories: [
+    '../stories/**/*.mdx',
+    '../stories/**/*.stories.@(js|jsx|ts|tsx)'
+  ],
+  addons: [
+    '@storybook/addon-links',
+    {
+      name: '@storybook/addon-essentials',
+      options: {
+        backgrounds: false
+      }
+    },
+    '@storybook/addon-interactions',
+    {
+      name: '@storybook/addon-styling',
+      options: {
+        postCss: true
+      }
+    },
+    '@storybook/addon-mdx-gfm',
+    'storybook-addon-themes'
+  ],
   framework: {
-    name: "@storybook/vue3-webpack5",
+    name: '@storybook/vue3-webpack5',
     options: {}
   },
   docs: {
-    autodocs: "tag"
+    autodocs: 'tag'
   },
   webpackFinal: config => {
     return {

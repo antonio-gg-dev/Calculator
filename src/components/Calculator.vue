@@ -147,7 +147,7 @@ export default defineComponent({
   }
 
   &__display {
-    @apply px-6 pb-5 text-right text-4xl leading-none bg-display text-display-alt;
+    @apply px-6 pb-5 text-right text-4xl leading-none transition-all bg-display text-display-alt;
     grid-area: display;
   }
 

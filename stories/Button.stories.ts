@@ -32,7 +32,7 @@ const Template: StoryFn = (args) => ({
   }),
   template: `
     <Button
-      style="width: 5rem;"
+      class="w-20"
       v-bind="args"
     >
       {{ args.label }}

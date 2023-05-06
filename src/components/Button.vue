@@ -25,6 +25,9 @@ export default defineComponent({
   &__button {
     @apply block aspect-square rounded-full text-4xl transition-all shadow-out;
 
+    // theme nata
+    @apply nata:aspect-auto nata:h-14 nata:rounded-2xl;
+
     &--number {
       @apply bg-base text-base-alt;
 

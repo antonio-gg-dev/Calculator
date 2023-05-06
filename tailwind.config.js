@@ -2,12 +2,14 @@
 module.exports = {
   content: [
     './public/index.html',
+    './src/modules/ThemeSwitcher.ts',
+    './stories/**/*.stories.ts',
     './src/**/*.vue'
   ],
   theme: {
     extend: {
       maxWidth: {
-        calculator: '32rem'
+        container: '32rem'
       }
     }
   },
@@ -17,6 +19,7 @@ module.exports = {
         extend: {
           colors: {
             background: '#f2f4f8',
+            calculator: '#f2f4f800',
             display: {
               DEFAULT: '#f2f4f800',
               alt: '#1a1a1a'
@@ -48,7 +51,9 @@ module.exports = {
           },
           boxShadow: {
             out: '0.25rem 0.25rem 0.75rem #0000002f, -0.25rem -0.25rem 0.75rem #ffffff, inset 0 0 0 transparent, inset 0 0 0 transparent',
-            in: '0 0 0 transparent, 0 0 0 transparent, inset 0.25rem 0.25rem 0.75rem #0000002f, inset -0.25rem -0.25rem 0.75rem #ffffff'
+            in: '0 0 0 transparent, 0 0 0 transparent, inset 0.25rem 0.25rem 0.75rem #0000002f, inset -0.25rem -0.25rem 0.75rem #ffffff',
+            display: 'none',
+            calculator: 'none'
           }
         }
       },
@@ -57,6 +62,7 @@ module.exports = {
         extend: {
           colors: {
             background: '#20242d',
+            calculator: '#20242d00',
             display: {
               DEFAULT: '#20242d00',
               alt: '#ffffff'
@@ -88,7 +94,51 @@ module.exports = {
           },
           boxShadow: {
             out: '0.25rem 0.25rem 0.75rem #000000, -0.25rem -0.25rem 0.75rem #ffffff2f, inset 0 0 0 transparent, inset 0 0 0 transparent',
-            in: '0 0 0 transparent, 0 0 0 transparent, inset 0.25rem 0.25rem 0.75rem #000000, inset -0.25rem -0.25rem 0.75rem #ffffff2f'
+            in: '0 0 0 transparent, 0 0 0 transparent, inset 0.25rem 0.25rem 0.75rem #000000, inset -0.25rem -0.25rem 0.75rem #ffffff2f',
+            display: 'none',
+            calculator: 'none'
+          }
+        }
+      }, {
+        name: 'nata',
+        extend: {
+          colors: {
+            background: '#f2f2f2',
+            calculator: '#262626',
+            display: {
+              DEFAULT: '#bfbfbf',
+              alt: '#000000'
+            },
+            base: {
+              DEFAULT: '#ffffff',
+              highlight: '#f2f2f2',
+              alt: {
+                DEFAULT: '#000000',
+                highlight: '#000000'
+              }
+            },
+            primary: {
+              DEFAULT: '#0070e6',
+              highlight: '#1a89ff',
+              alt: {
+                DEFAULT: '#ffffff',
+                highlight: '#ffffff'
+              }
+            },
+            danger: {
+              DEFAULT: '#d12215',
+              highlight: '#ea3c2e',
+              alt: {
+                DEFAULT: '#ffffff',
+                highlight: '#ffffff'
+              }
+            }
+          },
+          boxShadow: {
+            out: 'inset 0 0.25rem 0.75rem #ffffff7f, inset 0 -0.25rem 0.75rem #0000007f',
+            in: 'inset 0 0.25rem 0.5rem #ffffff7f, inset 0 -0.25rem 0.5rem #0000007f',
+            display: 'inset 0 0.25rem 0.75rem #0000007f, inset 0 -0.25rem 0.75rem #ffffff7f',
+            calculator: '0 0.25rem 0.125rem #00000055, 0 0.25rem 1.25rem #00000055'
           }
         }
       }]

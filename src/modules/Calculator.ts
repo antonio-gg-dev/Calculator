@@ -6,6 +6,7 @@ export enum Operation {
   division = '÷',
   multiplication = '×',
 }
+
 export class Calculator {
   private firstNumber = '0'
   private operation: Operation | undefined

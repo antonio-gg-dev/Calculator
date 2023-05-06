@@ -137,18 +137,24 @@ export default defineComponent({
 <style scoped lang="scss">
 .calculator {
   &__container {
-    @apply grid w-screen grid-cols-5 gap-4 p-6 max-w-calculator;
+    @apply grid w-screen grid-cols-5 gap-4 p-6 transition-all max-w-container bg-calculator shadow-calculator;
     grid-template-areas:
       "display  display  display  display        display"
       "number-7 number-8 number-9 division       clear"
       "number-4 number-5 number-6 multiplication erase"
       "number-1 number-2 number-3 subtraction    calculate"
       "symbol   number-0 decimal  addition       calculate";
+
+    // theme nata
+    @apply nata:rounded-2xl;
   }
 
   &__display {
-    @apply px-6 pb-5 text-right text-4xl leading-none transition-all bg-display text-display-alt;
+    @apply px-6 py-5 text-right text-4xl leading-none transition-all bg-display text-display-alt shadow-display;
     grid-area: display;
+
+    // theme nata
+    @apply nata:rounded-2xl;
   }
 
   @for $number from 0 through 9 {
@@ -192,6 +198,9 @@ export default defineComponent({
   &__button-calculate {
     @apply aspect-auto;
     grid-area: calculate;
+
+    // theme nata
+    @apply nata:h-auto;
   }
 }
 </style>

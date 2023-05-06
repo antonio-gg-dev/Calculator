@@ -1,3 +1,7 @@
 body {
-  @apply transition-all bg-background;
+  @apply bg-background;
+
+  &.stop-animations * {
+    transition: none !important;
+  }
 }

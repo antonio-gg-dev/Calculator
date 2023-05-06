@@ -137,7 +137,7 @@ export default defineComponent({
 <style scoped lang="scss">
 .calculator {
   &__container {
-    @apply grid w-screen grid-cols-5 gap-4 p-6 transition-all max-w-container bg-calculator shadow-calculator;
+    @apply grid w-screen grid-cols-5 gap-4 p-6 max-w-container bg-calculator shadow-calculator;
     grid-template-areas:
       "display  display  display  display        display"
       "number-7 number-8 number-9 division       clear"
@@ -150,7 +150,7 @@ export default defineComponent({
   }
 
   &__display {
-    @apply px-6 py-5 text-right text-4xl leading-none transition-all bg-display text-display-alt shadow-display;
+    @apply px-6 py-5 text-right text-4xl leading-none bg-display text-display-alt shadow-display;
     grid-area: display;
 
     // theme nata

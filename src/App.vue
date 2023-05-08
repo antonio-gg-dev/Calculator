@@ -1,37 +1,21 @@
 <template>
   <div class="app__container">
-    <CalculatorComponent :calculator="calculator" />
-    <input
-      v-for="theme in Themes"
-      @click="themeSwitcher.setTheme(theme)"
-      :key="theme"
-      type="button"
-      :value="theme"
-    >
+    <TheCalculator :calculator="calculator" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import CalculatorComponent from '@/components/Calculator.vue'
-import { Calculator as CalculatorService } from '@/modules/Calculator'
-import { Theme, ThemeSwitcher } from '@/modules/ThemeSwitcher'
-import Button from '@/components/Button.vue'
+import TheCalculator from '@/components/TheCalculator.vue'
+import { Calculator } from '@/modules/Calculator'
+import { ThemeSwitcher } from '@/modules/ThemeSwitcher'
 
 export default defineComponent({
-  computed: {
-    Themes () {
-      return Theme
-    }
-  },
-  components: { CalculatorComponent },
+  components: { TheCalculator },
   data: () => ({
-    calculator: new CalculatorService(),
+    calculator: new Calculator(),
     themeSwitcher: new ThemeSwitcher()
-  }),
-  created () {
-    this.themeSwitcher.setUserTheme()
-  }
+  })
 })
 </script>
 

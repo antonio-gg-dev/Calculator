@@ -1,7 +1,7 @@
 <template>
   <button :class="[
-    'button__button',
-    `button__button--${variant}`
+    'calculator-button__button',
+    `calculator-button__button--${variant}`
   ]">
     <slot />
   </button>
@@ -21,7 +21,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.button {
+.calculator-button {
   &__button {
     @apply block aspect-square rounded-full text-4xl transition-all shadow-out;
 

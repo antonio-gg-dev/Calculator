@@ -1,10 +1,10 @@
 import { shallowMount, VueWrapper } from '@vue/test-utils'
-import CalculatorComponent from '@/components/Calculator.vue'
-import { Calculator as CalculatorService, Operation } from '@/modules/Calculator'
+import TheCalculator from '@/components/TheCalculator.vue'
+import { Calculator, Operation } from '@/modules/Calculator'
 
-describe('@/components/Calculator.vue', () => {
-  let calculatorService: CalculatorService
-  let calculatorComponent: VueWrapper<InstanceType<typeof CalculatorComponent>>
+describe('@/components/TheCalculator.vue', () => {
+  let calculatorService: Calculator
+  let calculatorComponent: VueWrapper<InstanceType<typeof TheCalculator>>
 
   beforeEach(() => {
     calculatorService = {
@@ -16,9 +16,9 @@ describe('@/components/Calculator.vue', () => {
       erase: jest.fn(),
       addDecimalSeparator: jest.fn(),
       toggleSymbol: jest.fn()
-    } as unknown as CalculatorService
+    } as unknown as Calculator
 
-    calculatorComponent = shallowMount(CalculatorComponent, {
+    calculatorComponent = shallowMount(TheCalculator, {
       props: {
         calculator: calculatorService
       }

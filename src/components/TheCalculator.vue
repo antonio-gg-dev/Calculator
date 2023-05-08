@@ -1,93 +1,95 @@
 <template>
-  <div class="calculator__container">
+  <div class="the-calculator__container">
     <div
-      class="calculator__display"
+      class="the-calculator__display"
       data-test="display"
     >
       {{ calculator.print() }}
     </div>
 
-    <Button
+    <CalculatorButton
       v-for="(_, number) in 10"
       :key="number"
       @mousedown.left="calculator.addNumber(number)"
       variant="number"
-      :class="`calculator__button-${number}`"
+      :class="`the-calculator__button-${number}`"
       :data-test="`number-${number}`"
     >
       {{ number }}
-    </Button>
+    </CalculatorButton>
 
-    <Button
+    <CalculatorButton
       v-for="(symbol, operation) in Operation"
       :key="operation"
       @mousedown.left="calculator.setOperation(symbol)"
       variant="operation"
-      :class="`calculator__button-${operation}`"
+      :class="`the-calculator__button-${operation}`"
       :data-test="`operation-${operation}`"
     >
       {{ symbol }}
-    </Button>
+    </CalculatorButton>
 
-    <Button
+    <CalculatorButton
       key="decimal"
       @mousedown.left="calculator.addDecimalSeparator()"
       variant="operation"
-      class="calculator__button-decimal"
+      class="the-calculator__button-decimal"
       data-test="decimal"
     >
       {{ calculator.decimalSeparator }}
-    </Button>
+    </CalculatorButton>
 
-    <Button
+    <CalculatorButton
       key="decimal"
       @mousedown.left="calculator.toggleSymbol()"
       variant="operation"
-      class="calculator__button-symbol"
+      class="the-calculator__button-symbol"
       data-test="symbol"
     >
       ±
-    </Button>
+    </CalculatorButton>
 
-    <Button
+    <CalculatorButton
       key="clear"
       @mousedown.left="calculator.clear()"
       variant="clear"
-      class="calculator__button-clear"
+      class="the-calculator__button-clear"
       data-test="clear"
     >
       C
-    </Button>
+    </CalculatorButton>
 
-    <Button
+    <CalculatorButton
       key="erase"
       @mousedown.left="calculator.erase()"
       variant="operation"
-      class="calculator__button-erase"
+      class="the-calculator__button-erase"
       data-test="erase"
     >
       ⌫
-    </Button>
+    </CalculatorButton>
 
-    <Button
+    <CalculatorButton
       key="calculate"
       @mousedown.left="calculator.calculate()"
       variant="operation"
-      class="calculator__button-calculate"
+      class="the-calculator__button-calculate"
       data-test="calculate"
     >
       =
-    </Button>
+    </CalculatorButton>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import Button from '@/components/Button.vue'
+import CalculatorButton from '@/components/CalculatorButton.vue'
 import { Calculator, Operation } from '@/modules/Calculator'
 
 export default defineComponent({
-  components: { Button },
+  components: {
+    CalculatorButton
+  },
   props: {
     calculator: {
       required: true,
@@ -135,7 +137,7 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.calculator {
+.the-calculator {
   &__container {
     @apply grid w-screen grid-cols-5 gap-4 p-6 max-w-container bg-calculator shadow-calculator;
     grid-template-areas:

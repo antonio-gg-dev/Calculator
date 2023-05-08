@@ -1,10 +1,14 @@
 <template>
-  <button :class="[
-    'calculator-button__button',
-    `calculator-button__button--${variant}`
-  ]">
+  <component
+    :is="href ? 'a' : 'button'"
+    :href="href"
+    :class="[
+      'calculator-button__button',
+      `calculator-button__button--${variant}`
+    ]"
+  >
     <slot />
-  </button>
+  </component>
 </template>
 
 <script lang="ts">
@@ -12,6 +16,10 @@ import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
   props: {
+    href: {
+      default: undefined,
+      type: String as PropType<string>
+    },
     variant: {
       required: true,
       type: String as PropType<'number' | 'operation' | 'clear'>

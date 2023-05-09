@@ -23,11 +23,11 @@ export class ThemeSwitcher {
     localStorage.setItem('theme', theme)
   }
 
-  async setUserTheme () {
+  async loadUserTheme () {
     await this.setTheme(this.getLastTheme() ?? this.getOsTheme())
   }
 
-  getLastTheme (): Theme | null {
+  private getLastTheme (): Theme | null {
     const theme = localStorage.getItem('theme') as Theme | null
 
     if (theme && Theme[theme]) {
@@ -37,7 +37,7 @@ export class ThemeSwitcher {
     return null
   }
 
-  getOsTheme (): Theme {
+  private getOsTheme (): Theme {
     let theme = Theme.light
 
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {

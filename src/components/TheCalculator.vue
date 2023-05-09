@@ -66,7 +66,10 @@
       class="the-calculator__button-erase"
       data-test="erase"
     >
-      ⌫
+      <FontAwesomeIcon
+        :icon="eraseIcon"
+        fixedWidth
+      />
     </CalculatorButton>
 
     <CalculatorButton
@@ -85,9 +88,12 @@
 import { defineComponent, PropType } from 'vue'
 import CalculatorButton from '@/components/CalculatorButton.vue'
 import { Calculator, Operation } from '@/modules/Calculator'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faDeleteLeft } from '@fortawesome/free-solid-svg-icons'
 
 export default defineComponent({
   components: {
+    FontAwesomeIcon,
     CalculatorButton
   },
   props: {
@@ -99,6 +105,11 @@ export default defineComponent({
   data: () => ({
     Operation
   }),
+  computed: {
+    eraseIcon () {
+      return faDeleteLeft
+    }
+  },
   methods: {
     keyHandler ({ key }: KeyboardEvent) {
       if (key === '0') this.calculator.addNumber(0)
@@ -202,7 +213,7 @@ export default defineComponent({
     grid-area: calculate;
 
     // theme nata
-    @apply nata:h-auto;
+    @apply nata:aspect-auto;
   }
 }
 </style>

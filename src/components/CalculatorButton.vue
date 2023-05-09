@@ -31,10 +31,13 @@ export default defineComponent({
 <style scoped lang="scss">
 .calculator-button {
   &__button {
-    @apply block aspect-square rounded-full text-4xl transition-all shadow-out;
+    @apply grid aspect-square place-items-center rounded-full text-4xl transition-all shadow-out;
 
     // theme nata
-    @apply nata:aspect-auto nata:h-14 nata:rounded-2xl;
+    @apply nata:rounded-2xl;
+    @screen sm {
+      @apply nata:aspect-video;
+    }
 
     &--number {
       @apply bg-base text-base-alt;

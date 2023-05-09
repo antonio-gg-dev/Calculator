@@ -1,6 +1,7 @@
 <template>
   <div class="theme-bar__container">
     <CalculatorButton
+      class="theme-bar__button"
       href="https://github.com/Tito-Kati/Calculator"
       target="_blank"
       key="github"
@@ -13,6 +14,7 @@
     </CalculatorButton>
 
     <CalculatorButton
+      class="theme-bar__button"
       v-for="theme in themes"
       @click="themeSwitcher.setTheme(theme)"
       :key="theme"
@@ -67,11 +69,24 @@ export default defineComponent({
     }
   },
   created () {
-    this.themeSwitcher.setUserTheme()
+    this.themeSwitcher.loadUserTheme()
   }
 })
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+.theme-bar {
+  &__container {
+    @apply flex h-16 gap-2 p-2;
 
+    @screen md {
+      @apply h-auto w-16 flex-col self-start;
+    }
+  }
+
+  &__button {
+    // theme nata
+    @apply nata:aspect-square;
+  }
+}
 </style>

@@ -10,7 +10,23 @@ const preview: Preview = {
         date: /Date$/,
       },
     },
-  },
+    themes: {
+      default: 'Light',
+      list: [{
+        name: 'Light',
+        class: 'light',
+        color: '#f2f4f8'
+      }, {
+        name: 'Dark',
+        class: 'dark',
+        color: '#20242d'
+      }, {
+        name: 'Nata',
+        class: 'nata',
+        color: '#004a98'
+      }]
+    }
+  }
 };
 
 export default preview;

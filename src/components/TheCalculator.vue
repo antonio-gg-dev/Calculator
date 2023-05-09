@@ -1,93 +1,101 @@
 <template>
-  <div class="calculator__container">
+  <div class="the-calculator__container">
     <div
-      class="calculator__display"
+      class="the-calculator__display"
       data-test="display"
     >
       {{ calculator.print() }}
     </div>
 
-    <Button
+    <CalculatorButton
       v-for="(_, number) in 10"
       :key="number"
       @mousedown.left="calculator.addNumber(number)"
       variant="number"
-      :class="`calculator__button-${number}`"
+      :class="`the-calculator__button-${number}`"
       :data-test="`number-${number}`"
     >
       {{ number }}
-    </Button>
+    </CalculatorButton>
 
-    <Button
+    <CalculatorButton
       v-for="(symbol, operation) in Operation"
       :key="operation"
       @mousedown.left="calculator.setOperation(symbol)"
       variant="operation"
-      :class="`calculator__button-${operation}`"
+      :class="`the-calculator__button-${operation}`"
       :data-test="`operation-${operation}`"
     >
       {{ symbol }}
-    </Button>
+    </CalculatorButton>
 
-    <Button
+    <CalculatorButton
       key="decimal"
       @mousedown.left="calculator.addDecimalSeparator()"
       variant="operation"
-      class="calculator__button-decimal"
+      class="the-calculator__button-decimal"
       data-test="decimal"
     >
       {{ calculator.decimalSeparator }}
-    </Button>
+    </CalculatorButton>
 
-    <Button
+    <CalculatorButton
       key="decimal"
       @mousedown.left="calculator.toggleSymbol()"
       variant="operation"
-      class="calculator__button-symbol"
+      class="the-calculator__button-symbol"
       data-test="symbol"
     >
       ±
-    </Button>
+    </CalculatorButton>
 
-    <Button
+    <CalculatorButton
       key="clear"
       @mousedown.left="calculator.clear()"
       variant="clear"
-      class="calculator__button-clear"
+      class="the-calculator__button-clear"
       data-test="clear"
     >
       C
-    </Button>
+    </CalculatorButton>
 
-    <Button
+    <CalculatorButton
       key="erase"
       @mousedown.left="calculator.erase()"
       variant="operation"
-      class="calculator__button-erase"
+      class="the-calculator__button-erase"
       data-test="erase"
     >
-      ⌫
-    </Button>
+      <FontAwesomeIcon
+        :icon="eraseIcon"
+        fixedWidth
+      />
+    </CalculatorButton>
 
-    <Button
+    <CalculatorButton
       key="calculate"
       @mousedown.left="calculator.calculate()"
       variant="operation"
-      class="calculator__button-calculate"
+      class="the-calculator__button-calculate"
       data-test="calculate"
     >
       =
-    </Button>
+    </CalculatorButton>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import Button from '@/components/Button.vue'
+import CalculatorButton from '@/components/CalculatorButton.vue'
 import { Calculator, Operation } from '@/modules/Calculator'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faDeleteLeft } from '@fortawesome/free-solid-svg-icons'
 
 export default defineComponent({
-  components: { Button },
+  components: {
+    FontAwesomeIcon,
+    CalculatorButton
+  },
   props: {
     calculator: {
       required: true,
@@ -97,6 +105,11 @@ export default defineComponent({
   data: () => ({
     Operation
   }),
+  computed: {
+    eraseIcon () {
+      return faDeleteLeft
+    }
+  },
   methods: {
     keyHandler ({ key }: KeyboardEvent) {
       if (key === '0') this.calculator.addNumber(0)
@@ -135,20 +148,26 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.calculator {
+.the-calculator {
   &__container {
-    @apply grid w-screen max-w-calculator grid-cols-5 gap-4 p-6;
+    @apply grid w-screen grid-cols-5 gap-4 p-6 max-w-container bg-calculator shadow-calculator;
     grid-template-areas:
       "display  display  display  display        display"
       "number-7 number-8 number-9 division       clear"
       "number-4 number-5 number-6 multiplication erase"
       "number-1 number-2 number-3 subtraction    calculate"
       "symbol   number-0 decimal  addition       calculate";
+
+    // theme nata
+    @apply nata:rounded-2xl;
   }
 
   &__display {
-    @apply px-6 pb-5 text-right text-4xl leading-none;
+    @apply px-6 py-5 text-right text-4xl leading-none bg-display text-display-alt shadow-display;
     grid-area: display;
+
+    // theme nata
+    @apply nata:rounded-2xl;
   }
 
   @for $number from 0 through 9 {
@@ -192,6 +211,9 @@ export default defineComponent({
   &__button-calculate {
     @apply aspect-auto;
     grid-area: calculate;
+
+    // theme nata
+    @apply nata:aspect-auto;
   }
 }
 </style>

@@ -1,10 +1,14 @@
 <template>
-  <button :class="[
-    'button__button',
-    `button__button--${variant}`
-  ]">
+  <component
+    :is="href ? 'a' : 'button'"
+    :href="href"
+    :class="[
+      'calculator-button__button',
+      `calculator-button__button--${variant}`
+    ]"
+  >
     <slot />
-  </button>
+  </component>
 </template>
 
 <script lang="ts">
@@ -12,6 +16,10 @@ import { defineComponent, PropType } from 'vue'
 
 export default defineComponent({
   props: {
+    href: {
+      default: undefined,
+      type: String as PropType<string>
+    },
     variant: {
       required: true,
       type: String as PropType<'number' | 'operation' | 'clear'>
@@ -21,9 +29,15 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-.button {
+.calculator-button {
   &__button {
-    @apply block aspect-square rounded-full text-4xl transition-all shadow-out;
+    @apply grid aspect-square place-items-center rounded-full text-4xl transition-all shadow-out;
+
+    // theme nata
+    @apply nata:rounded-2xl;
+    @screen sm {
+      @apply nata:aspect-video;
+    }
 
     &--number {
       @apply bg-base text-base-alt;

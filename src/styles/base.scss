@@ -1,3 +1,7 @@
-html {
-  @apply bg-base text-base-alt;
+body {
+  @apply bg-background;
+
+  &.stop-animations * {
+    transition: none !important;
+  }
 }

@@ -1,10 +1,10 @@
 import type { Meta, StoryFn } from '@storybook/vue3'
 
-import Calculator from '../src/components/Calculator.vue'
-import { Calculator as CalculatorService } from '../src/modules/Calculator'
+import TheCalculator from '../src/components/TheCalculator.vue'
+import { Calculator } from '../src/modules/Calculator'
 
 export default {
-  component: Calculator,
+  component: TheCalculator,
   argTypes: {
     screen: {
       control: {
@@ -12,11 +12,11 @@ export default {
       }
     }
   }
-} as Meta<typeof Calculator>
+} as Meta<typeof TheCalculator>
 
 const Template: StoryFn = (args) => ({
   components: {
-    Calculator
+    TheCalculator
   },
   setup: () => {
     const calculator = {
@@ -29,14 +29,14 @@ const Template: StoryFn = (args) => ({
       addDecimalSeparator: () => calculator,
       toggleSymbol: () => calculator,
       decimalSeparator: '.'
-    } as unknown as CalculatorService
+    } as unknown as Calculator
 
     return {
       calculator
     }
   },
   template: `
-    <Calculator :calculator="calculator" />
+    <TheCalculator :calculator="calculator" />
   `
 })
 

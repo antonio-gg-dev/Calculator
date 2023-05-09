@@ -1,11 +1,11 @@
 import type { Meta, StoryFn } from '@storybook/vue3'
 
-import Button from '../src/components/Button.vue'
+import CalculatorButton from '../src/components/CalculatorButton.vue'
 
 export default {
-  component: Button,
+  component: CalculatorButton,
   argTypes: {
-    label: {
+    default: {
       control: {
         type: 'text'
       }
@@ -21,39 +21,39 @@ export default {
       ]
     }
   }
-} as Meta<typeof Button>
+} as Meta<typeof CalculatorButton>
 
 const Template: StoryFn = (args) => ({
   components: {
-    Button
+    CalculatorButton
   },
   setup: () => ({
     args
   }),
   template: `
-    <Button
-      style="width: 5rem"
-      v-bind="args"
+    <CalculatorButton
+      class="w-20"
+      :variant="args.variant"
     >
-      {{ args.label }}
-    </Button>
+      {{ args.default }}
+    </CalculatorButton>
   `
 })
 
 export const Number = Template.bind({})
 Number.args = {
-  label: '0',
+  default: '0',
   variant: 'number'
 }
 
 export const Operation = Template.bind({})
 Operation.args = {
-  label: '+',
+  default: '+',
   variant: 'operation'
 }
 
 export const Clear = Template.bind({})
 Clear.args = {
-  label: 'C',
+  default: 'C',
   variant: 'clear'
 }

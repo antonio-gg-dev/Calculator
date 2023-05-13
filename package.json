@@ -3,15 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
-    "typecheck": "tsc",
-    "storybook": "storybook dev -p 6006",
+    "belial": "yarn lint && yarn typecheck && yarn test",
     "build-storybook": "storybook build",
     "chromatic": "npx chromatic --project-token=2c65e473e048",
-    "belial": "yarn lint && yarn typecheck && yarn test"
+    "dev": "vue-cli-service serve",
+    "storybook": "storybook dev -p 6006",
+    "test": "vue-cli-service test:unit",
+    "typecheck": "tsc"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
@@ -21,6 +21,7 @@
     "@fortawesome/vue-fontawesome": "^3.0.3",
     "core-js": "^3.8.3",
     "decimal.js": "^10.4.3",
+    "register-service-worker": "^1.7.2",
     "vue": "^3.2.13",
     "vue-class-component": "^8.0.0-0"
   },
@@ -39,6 +40,7 @@
     "@typescript-eslint/parser": "^5.4.0",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
+    "@vue/cli-plugin-pwa": "~5.0.0",
     "@vue/cli-plugin-typescript": "~5.0.0",
     "@vue/cli-plugin-unit-jest": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
@@ -72,6 +74,6 @@
     "typescript": "~4.5.5",
     "vue-loader": "^17.0.1"
   },
-  "readme": "ERROR: No README data found!",
-  "_id": "calculator@0.1.0"
+  "_id": "calculator@0.1.0",
+  "readme": "ERROR: No README data found!"
 }
